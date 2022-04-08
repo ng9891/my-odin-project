@@ -8,7 +8,7 @@ const findTheOldest = function(people) {
     let age = death - person.yearOfBirth;
     if (age > max) {
       max = age;
-      oldestPerson = Object.assign(oldestPerson, person);
+      oldestPerson = Object.assign({}, person);
     }
   });
   return oldestPerson;
