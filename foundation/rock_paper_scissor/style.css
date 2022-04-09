@@ -14,6 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100vw;
+  height: 100vh;
   background: rgba(32, 32, 32, 1);
 }
 
@@ -22,8 +23,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
   width: 100%;
+  height: 100%;
 }
 
 .content {
@@ -85,10 +86,25 @@ body {
   padding: 0.1rem 1rem;
 }
 
+.score .win {
+  background-color: green;
+}
+
+.score .lose {
+  background-color: red;
+}
+
 .field {
-  margin-top: 4rem;
-  flex: 1;
+  margin-top: 2.5rem;
+  flex: 1 0 auto;
+  flex-wrap: wrap;
   min-height: 20vh;
+}
+
+.field img {
+  object-fit: contain;
+  max-width: 13rem;
+  height: auto;
 }
 
 .field > div {
@@ -101,7 +117,7 @@ body {
 .player .btn {
   border: .1rem solid black;
   border-radius: .5rem;
-  margin: 4rem 0.5rem;
+  margin: 1rem 0.5rem 3rem 0.5rem;
   font-size: 1rem;
   padding: 0.7rem .2rem;
   width: 8rem;
@@ -109,6 +125,7 @@ body {
   color: white;
   background: rgba(0, 0, 0, 0.4);
   text-shadow: 0 0 .5rem black;
+  transition: all .07s ease;
 }
 
 .player .btn > * {
@@ -117,6 +134,12 @@ body {
 
 .player :hover {
   background: rgba(255, 0, 0, 0.4);
+  transform: scale(1.1);
+}
+
+.btn.selected {
+  background: rgba(255, 0, 0, 0.4);
+  transform: scale(1.1);
 }
 
 .key {
@@ -126,7 +149,7 @@ body {
 
 .footer {
   text-align: center;
-  /* border-style: dashed; */
+  margin-top: auto;
   width: 100%;
   background-color: rgba(21, 77, 15);
   color: white;
