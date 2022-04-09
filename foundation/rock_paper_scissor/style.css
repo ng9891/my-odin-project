@@ -1,0 +1,139 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background: rgba(32, 32, 32, 1);
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: white;
+}
+
+.round {
+  margin: 2rem 0rem;
+  border-radius: .5rem;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.score {
+  flex-wrap: wrap;
+}
+
+.score > div {
+  border: .1rem solid black;
+  border-radius: .5rem;
+  margin: 0rem 3rem;
+  font-size: 1rem;
+  padding: 0.4rem .2rem;
+  width: 8rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 .5rem black;
+  word-wrap: break-word;
+}
+
+.score div:nth-child(2) {
+  max-width: 20rem;
+  flex: 1;
+  font-size: 1.7rem;
+}
+
+.score-title {
+  display: block;
+}
+
+.score-amount {
+  font-size: 1.7rem;
+}
+
+.announce {
+  padding: 0.1rem 1rem;
+}
+
+.field {
+  margin-top: 4rem;
+  flex: 1;
+  min-height: 20vh;
+}
+
+.field > div {
+  font-size: 4rem;
+  color: white;
+  padding: 0 5rem;
+  text-align: center;
+}
+
+.player .btn {
+  border: .1rem solid black;
+  border-radius: .5rem;
+  margin: 4rem 0.5rem;
+  font-size: 1rem;
+  padding: 0.7rem .2rem;
+  width: 8rem;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 .5rem black;
+}
+
+.player .btn > * {
+  pointer-events: none;
+}
+
+.player :hover {
+  background: rgba(255, 0, 0, 0.4);
+}
+
+.key {
+  font-size: 0.8rem;
+  color: gold;
+}
+
+.footer {
+  text-align: center;
+  /* border-style: dashed; */
+  width: 100%;
+  background-color: rgba(21, 77, 15);
+  color: white;
+  padding: 0.4rem;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}

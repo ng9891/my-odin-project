@@ -1,22 +1,73 @@
-!<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Rock Paper Scissors</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-  </head>
-  <body>
-    <!--[if lt IE 7]>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>vT's Rock Paper Scissors</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="index.js" async defer></script>
+</head>
+
+<body>
+  <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    
-    <script src="./index.js" async defer></script>
-  </body>
+  <div id="container">
+    <div class="title">
+      <div class="content rounds">
+        <div class="round">
+          <span>Round</span>
+          <span class="round-number">1</span>
+        </div>
+      </div>
+      <div class="content score">
+        <div>
+          <span class="score-title">You</span>
+          <span class="score-amount score-player">0</span>
+        </div>
+        <div>
+          <span class="score-title announce">First to 5 wins!</span>
+        </div>
+        <div>
+          <span class="score-title">PC</span>
+          <span class="score-amount score-pc">0</span>
+        </div>
+      </div>
+    </div>
+    <div class="content field">
+      <div class="player-field">
+        ?
+      </div>
+      <div class="pc-field">
+        ?
+      </div>
+    </div>
+    <div class="content player">
+      <div class="btn">
+        <div>Rock</div>
+        <span class="key">Q</span>
+      </div>
+      <div class="btn">
+        <div>Paper</div>
+        <span class="key">E</span>
+      </div>
+      <div class="btn">
+        <div>Scissor</div>
+        <span class="key">R</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <i>2022 - Made by </i><a href="https://github.com/ng9891"><b>vT</b></a>
+    </div>
+  </div>
+</body>
+
 </html>

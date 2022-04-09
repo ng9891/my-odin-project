@@ -3,6 +3,6 @@ The objective is to apply all the CSS and HTML learnt up until this point and re
 
 Link to the project description [here](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/landing-page)
 
-[Link to this page](https://ng9891.github.io/my-odin-project/landingPage_foundations/)
+[Link to this page](https://ng9891.github.io/my-odin-project/foundation/landing_page/)
 
 Author: vT

@@ -56,21 +56,21 @@
     return getResult(playerStatus, p1, p2);
   }
 
-  function game(rounds) {
-    for (let i = 0; i < rounds; i++) {
-      const input = prompt(`0 for Rock | 1 for Paper | 2 for Scissors`);
-      if (!input) break;
+  // function game(rounds) {
+  //   for (let i = 0; i < rounds; i++) {
+  //     const input = prompt(`0 for Rock | 1 for Paper | 2 for Scissors`);
+  //     if (!input) break;
 
-      const intInput = Number(input);
-      if (isNaN(input) || intInput > 2 || intInput < 0) {
-        console.error('Invalid input. Try again.');
-        i = i - 1;
-        continue;
-      }
+  //     const intInput = Number(input);
+  //     if (isNaN(input) || intInput > 2 || intInput < 0) {
+  //       console.error('Invalid input. Try again.');
+  //       i = i - 1;
+  //       continue;
+  //     }
 
-      console.log(playRound(intInput, computerPlay()));
-    }
-  }
+  //     console.log(playRound(intInput, computerPlay()));
+  //   }
+  // }
 
-  game(5);
+  // game(5);
 })();
