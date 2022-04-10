@@ -14,6 +14,7 @@
   }
 
   function getWeightedPlay(weightAgainst) {
+    console.log('Its Cheating!');
     const minWeight = Math.floor(100 / arrOfOptions.length);
     const maxWeight = 50;
 
@@ -24,17 +25,21 @@
     const weightForFavoredElement = minWeight + amountToIncrease;
     const randInt = getRandomInt(100);
 
-    if (weightAgainst === 0 && (randInt < weightForFavoredElement)) {    
-      return 1;
+    let winningPlay;
+    if (weightAgainst === 0) {
+      winningPlay = 1;
+      if (randInt < weightForFavoredElement) return winningPlay;
     }
-    if (weightAgainst === 1 && (randInt < weightForFavoredElement)) {
-      return 2;
+    if (weightAgainst === 1) {
+      winningPlay = 2;
+      if (randInt < weightForFavoredElement) return winningPlay;
     }
-    if (randInt < weightForFavoredElement) {
-      return 0;
+    if (weightAgainst === 2) {
+      winningPlay = 0;
+      if (randInt < weightForFavoredElement) return winningPlay;
     }
-    
-    const unFavoredElements = arrOfOptions.map((_,idx)=>idx).filter((el) => el !== weightAgainst);
+    console.log('But couldnt get away with it :)');
+    const unFavoredElements = arrOfOptions.map((_, idx) => idx).filter((el) => el !== winningPlay);
     return unFavoredElements[getRandomInt(unFavoredElements.length)];
   }
 
@@ -50,7 +55,7 @@
   };
 
   function computerPlay(playerPlayed) {
-    const willCheat = computerCheat();
+    const willCheat = computerCheat(playerScore, MIN_SCORE_TO_WIN);
     let played = willCheat ? getWeightedPlay(playerPlayed) : getRandomPlay();
     return played;
   }
@@ -151,14 +156,14 @@
 
   function handleClick(e) {
     const player = e.target.children[0].getAttribute('data-value');
-    const pc = computerPlay(player);
+    const pc = computerPlay(Number(player));
     announce(playRound(player, pc));
   }
 
   function handleKeyPress(e) {
     const player = document.querySelector(`div[data-key="${e.keyCode}"]`);
     if (!player) return;
-    const played = player.children[0].getAttribute('data-value');
+    const played = Number(player.children[0].getAttribute('data-value'));
     const pc = computerPlay(played);
     announce(playRound(played, pc));
     player.classList.toggle('selected');
