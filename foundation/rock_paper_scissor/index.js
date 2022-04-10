@@ -1,7 +1,11 @@
 (() => {
   const arrOfOptions = ['Rock', 'Paper', 'Scissors'];
+  const MIN_SCORE_TO_WIN = 5;
+  let rounds = 1;
+  let playerScore = 0;
+  let pcScore = 0;
 
-  function getRandomInt(max) {
+  function getRandomInt(max = 1) {
     return Math.floor(Math.random() * max);
   }
 
@@ -9,8 +13,46 @@
     return getRandomInt(arrOfOptions.length);
   }
 
-  function computerPlay() {
-    return getRandomPlay();
+  function getWeightedPlay(weightAgainst) {
+    const minWeight = Math.floor(100 / arrOfOptions.length);
+    const maxWeight = 40;
+
+    const range = maxWeight - minWeight;
+    const ratio = playerScore / minScoreToWin;
+
+    const amountToIncrease = Math.round(ratio * range);
+    const weightForFavoredElement = minWeight + amountToIncrease;
+    const randInt = getRandomInt(100);
+
+    if (weightAgainst === 0 && (randInt < weightForFavoredElement)) {    
+      return 1;
+    }
+    if (weightAgainst === 1 && (randInt < weightForFavoredElement)) {
+      return 2;
+    }
+    if (randInt < weightForFavoredElement) {
+      return 0;
+    }
+    
+    const unFavoredElements = arrOfOptions.map((_,idx)=>idx).filter((el) => el !== playerInput);
+    return unFavoredElements[getRandomInt(unFavoredPicks.length)];
+  }
+
+  const equation = (x) => {
+    return Math.pow(2, x);
+  };
+
+  // Computes if the pc gets to cheat
+  const computerCheat = function willPcCheatThisround(playerScore = 1, minScoreToWin = MIN_SCORE_TO_WIN) {
+    const chancePlayer = equation(playerScore);
+    const chanceCap = equation(minScoreToWin);
+    return getRandomInt(chanceCap) < chancePlayer;
+  };
+
+  function computerPlay(playerPlayed) {
+    const willCheat = computerCheat();
+    let played = willCheat ? getWeightedPlay(playerPlayed) : getRandomPlay();
+    return played;
   }
 
   function changeImage(player = 1, played = 0) {
@@ -23,22 +65,22 @@
     img.src = `./assets/${played}.png`;
   }
 
-  function playRound(p1 = 0, p2 = 0) {
-    if (isNaN(p1)) return;
-    const player = Number(p1);
+  function increaseRound() {
+    const counter = document.querySelector('.round-number');
+    counter.textContent = rounds;
+    rounds += 1;
+  }
+
+  function calculateWinner(p1 = 0, p2 = 0) {
     let playerStatus = 0;
-
-    changeImage(1, player);
-    changeImage(2, p2);
-
-    if (player === p2) playerStatus = 0;
-    else if (player === 0) {
+    if (p1 === p2) playerStatus = 0;
+    else if (p1 === 0) {
       if (p2 === 1) playerStatus = 2;
       else playerStatus = 1;
-    } else if (player === 1) {
+    } else if (p1 === 1) {
       if (p2 === 2) playerStatus = 2;
       else playerStatus = 1;
-    } else if (player === 2) {
+    } else if (p1 === 2) {
       if (p2 === 0) playerStatus = 2;
       else playerStatus = 1;
     }
@@ -46,14 +88,18 @@
     return playerStatus;
   }
 
-  let rounds = 1;
-  let playerScore = 0;
-  let pcScore = 0;
+  function playRound(p1 = 0, p2 = 0) {
+    if (isNaN(p1)) return;
+    const player = Number(p1);
+    let pc = Number(p2);
 
-  function increaseRound() {
-    const counter = document.querySelector('.round-number');
-    counter.textContent = rounds;
-    rounds += 1;
+    let winner = calculateWinner(player, p2);
+
+    increaseRound();
+    changeImage(1, player);
+    changeImage(2, pc);
+
+    return winner;
   }
 
   function increasePlayerScore() {
@@ -78,10 +124,10 @@
   }
 
   function checkGameStatus() {
-    if (pcScore !== 5 && playerScore !== 5) return;
+    if (pcScore !== MIN_SCORE_TO_WIN && playerScore !== MIN_SCORE_TO_WIN) return;
     endGame();
     setTimeout(() => {
-      if (playerScore === 5) alert('Congratulations. You have won the game!');
+      if (playerScore === MIN_SCORE_TO_WIN) alert('Congratulations. You have won the game!');
       else alert('Sorry. You lost to the PC...');
     }, 500);
   }
@@ -104,9 +150,8 @@
   }
 
   function handleClick(e) {
-    increaseRound();
     const player = e.target.children[0].getAttribute('data-value');
-    const pc = computerPlay();
+    const pc = computerPlay(player);
     announce(playRound(player, pc));
   }
 
@@ -114,7 +159,7 @@
     const player = document.querySelector(`div[data-key="${e.keyCode}"]`);
     if (!player) return;
     const played = player.children[0].getAttribute('data-value');
-    const pc = computerPlay();
+    const pc = computerPlay(played);
     announce(playRound(played, pc));
     player.classList.toggle('selected');
   }
