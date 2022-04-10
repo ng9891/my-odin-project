@@ -15,10 +15,10 @@
 
   function getWeightedPlay(weightAgainst) {
     const minWeight = Math.floor(100 / arrOfOptions.length);
-    const maxWeight = 40;
+    const maxWeight = 50;
 
     const range = maxWeight - minWeight;
-    const ratio = playerScore / minScoreToWin;
+    const ratio = playerScore / MIN_SCORE_TO_WIN;
 
     const amountToIncrease = Math.round(ratio * range);
     const weightForFavoredElement = minWeight + amountToIncrease;
@@ -34,8 +34,8 @@
       return 0;
     }
     
-    const unFavoredElements = arrOfOptions.map((_,idx)=>idx).filter((el) => el !== playerInput);
-    return unFavoredElements[getRandomInt(unFavoredPicks.length)];
+    const unFavoredElements = arrOfOptions.map((_,idx)=>idx).filter((el) => el !== weightAgainst);
+    return unFavoredElements[getRandomInt(unFavoredElements.length)];
   }
 
   const equation = (x) => {
