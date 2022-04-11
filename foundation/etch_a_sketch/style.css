@@ -1,9 +1,10 @@
-:root{
-  --main-bg-color: #737D89;
-  --footer-bg-color: #737D89;
+:root {
+  --main-bg-color: #737d89;
+  --secondary-bg-color: #869f9f;
+  --footer-bg-color: #737d89;
   --footer-font-color: white;
-  --matrix-color: #FFFBEF;
-  --secondary-bg-color: #869F9F;
+  --matrix-bg-color: #d7e3f5;
+  --matrix-border: #fffbef;
   --button-accent: #114c69;
 }
 
@@ -56,15 +57,15 @@ body {
   grid-template-columns: repeat(16, 1fr);
   height: 100%;
   width: 100%;
-  border: 3px solid rgba(0, 0, 0, 0.2);
+  border: 3px solid var(--main-bg-color);
   flex: 1 1 auto;
 }
 
 .grid > div {
   /* user-select learnt */
   user-select: none;
-  border: 1px solid var(--matrix-color);
-  background-color: #d7e3f5;
+  border: 1px solid var(--matrix-border);
+  background-color: var(--matrix-bg-color);
 }
 
 .btn-group > button {
@@ -87,7 +88,7 @@ body {
   }
 }
 
-.btn-group .active-btn-rainbow {
+.btn-group .active-btn-random {
   background-image: linear-gradient(90deg, #00c0ff 0%, #ffcf00 49%, #fc4f4f 80%, #00c0ff 100%);
   animation: slidebg 3s linear infinite;
   transform: scale(1.15);
@@ -114,13 +115,21 @@ body {
   text-align: center;
 }
 
-.color-picker {
-  background: black;
-  display: flex;
+.color-picker-container {
   position: absolute;
   right: 20%;
   bottom: 15%;
+  font-size: 0.6rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-picker {
   background: var(--main-bg-color);
+  padding-top: 0.3rem;
 }
 
 input[type=color] {
@@ -144,7 +153,6 @@ input[type=color]::-webkit-color-swatch-wrapper {
 }
 
 input[type=range] {
-
 }
 
 .footer {
@@ -169,7 +177,7 @@ input[type=range] {
     height: 80%;
   }
 
-  .color-picker {
+  .color-picker-container {
     position: static;
     padding: 1rem 0 2rem;
   }

@@ -5,4 +5,6 @@ Link to the project description [here](https://www.theodinproject.com/paths/foun
 
 [Link to this page](https://ng9891.github.io/my-odin-project/foundation/landing_page/)
 
+![preview](https://drive.google.com/uc?id=1Z5ZA72a2YBf2kZe7k-ZKG04dWsXIhLNo)
+
 Author: vT

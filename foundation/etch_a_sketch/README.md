@@ -5,6 +5,6 @@ Link to the project description [here](https://www.theodinproject.com/lessons/fo
 
 [Link to this page](https://ng9891.github.io/my-odin-project/foundation/etch_a_sketch/)
 
-![preview]()
+![preview](https://drive.google.com/uc?id=1CsYZcAPqk_nZLE8BGgN_f3788LOZ7_5y)
 
 Author: vT
