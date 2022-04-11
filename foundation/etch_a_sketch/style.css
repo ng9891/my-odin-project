@@ -1,0 +1,155 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(32, 32, 32, 1);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  color: white;
+  margin: 1rem 0rem 1rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.content {
+  width: 45%;
+  height: 80%;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  /* grid-template-columns: repeat(16, minmax(10px, 1fr)); */
+  /* grid-template-rows: repeat(128, 1fr); */
+  height: 100%;
+  width: 100%;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  flex: 1 1 auto;
+}
+
+.grid > div {
+  /* user-select learnt */
+  user-select: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.grid > div.selected {
+  background-color: rgba(21, 77, 15);
+}
+
+.btn-group {
+  margin-bottom: 0.5rem;
+  margin: 0.25rem 0 0.25rem;
+}
+
+.matrix-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0.25rem 0 0.25rem;
+}
+
+.restart {
+  /* transform: rotate(90deg); */
+  padding: 0.2rem 1rem;
+  margin-left: 1rem;
+  text-align: center;
+}
+
+.color-picker {
+  background: black;
+  display: flex;
+  position: absolute;
+  right: 20%;
+  bottom: 15%;
+  background: rgba(32, 32, 32, 1);
+}
+
+input[type=color] {
+  background: rgba(32, 32, 32, 1);
+  border: none;
+  height: 4rem;
+  width: 4rem;
+}
+
+input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+  border: none;
+  padding: 0;
+}
+
+.footer {
+  text-align: center;
+  margin-top: auto;
+  width: 100%;
+  background-color: rgba(21, 77, 15);
+  color: white;
+  padding: 0.5rem;
+  font-size: .8rem;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+  .content{
+    width: 70%;
+    height: 80%;
+  }
+
+  .color-picker{
+    position: static;
+    padding: 1rem 0 2rem;
+  }
+}
+
+@media (max-width: 850px) {
+  .content{
+    width: 70%;
+    height: 70%;
+  }
+}
+
+@media (max-width: 650px) {
+  .content{
+    width: 90%;
+    height: 55%;
+  }
+}
