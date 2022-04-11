@@ -1,4 +1,17 @@
 const findTheOldest = function(people) {
+  const getAge = (birth, death)=>{
+    const deathYear = death ? death : new Date().getFullYear();
+    return deathYear - birth;
+  }
+
+  return people.reduce((acc, person) => {
+    const agePerson = getAge(person.yearOfBirth, person.yearOfDeath)
+    const ageAcc = getAge(acc.yearOfBirth, acc.yearOfDeath)
+    return agePerson > ageAcc ? person : acc;
+  });
+};
+
+const findTheOldest2 = function(people) {
   let oldestPerson = {};
   let max = 0;
   people.forEach((person) => {
