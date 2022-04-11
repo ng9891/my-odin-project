@@ -1,3 +1,12 @@
+:root{
+  --main-bg-color: #737D89;
+  --footer-bg-color: #737D89;
+  --footer-font-color: white;
+  --matrix-color: #FFFBEF;
+  --secondary-bg-color: #869F9F;
+  --button-accent: #114c69;
+}
+
 body,
 html {
   margin: 0;
@@ -12,7 +21,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  background: rgba(32, 32, 32, 1);
+  background: var(--main-bg-color);
 }
 
 .container {
@@ -34,7 +43,7 @@ body {
 .content {
   width: 45%;
   height: 80%;
-  background: white;
+  background: var(--secondary-bg-color);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -45,8 +54,6 @@ body {
 .grid {
   display: grid;
   grid-template-columns: repeat(16, 1fr);
-  /* grid-template-columns: repeat(16, minmax(10px, 1fr)); */
-  /* grid-template-rows: repeat(128, 1fr); */
   height: 100%;
   width: 100%;
   border: 3px solid rgba(0, 0, 0, 0.2);
@@ -56,12 +63,35 @@ body {
 .grid > div {
   /* user-select learnt */
   user-select: none;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--matrix-color);
+  background-color: #d7e3f5;
 }
 
-.grid > div.selected {
-  background-color: rgba(21, 77, 15);
+.btn-group > button {
+  padding: 0.2rem 0.3rem;
+  border-radius: 5px;
+  width: 6rem;
+  transition: all 0.2s ease;
+}
+
+.btn-group .active-btn {
+  background-color: var(--button-accent);
+  transform: scale(1.15);
+  color: white;
+}
+
+/* https://codepen.io/lemmin/pen/WObwRX */
+@keyframes slidebg {
+  to {
+    background-position: 5.8rem;
+  }
+}
+
+.btn-group .active-btn-rainbow {
+  background-image: linear-gradient(90deg, #00c0ff 0%, #ffcf00 49%, #fc4f4f 80%, #00c0ff 100%);
+  animation: slidebg 3s linear infinite;
+  transform: scale(1.15);
+  color: white;
 }
 
 .btn-group {
@@ -77,7 +107,7 @@ body {
   margin: 0.25rem 0 0.25rem;
 }
 
-.restart {
+.reset {
   /* transform: rotate(90deg); */
   padding: 0.2rem 1rem;
   margin-left: 1rem;
@@ -90,11 +120,11 @@ body {
   position: absolute;
   right: 20%;
   bottom: 15%;
-  background: rgba(32, 32, 32, 1);
+  background: var(--main-bg-color);
 }
 
 input[type=color] {
-  background: rgba(32, 32, 32, 1);
+  background: var(--main-bg-color);
   border: none;
   height: 4rem;
   width: 4rem;
@@ -113,14 +143,19 @@ input[type=color]::-webkit-color-swatch-wrapper {
   padding: 0;
 }
 
+input[type=range] {
+
+}
+
 .footer {
   text-align: center;
   margin-top: auto;
   width: 100%;
-  background-color: rgba(21, 77, 15);
-  color: white;
+  background-color: var(--footer-bg-color);
+  color: var(--footer-font-color);
   padding: 0.5rem;
   font-size: .8rem;
+  border-top: 1px solid black;
 }
 
 .footer a {
@@ -129,26 +164,26 @@ input[type=color]::-webkit-color-swatch-wrapper {
 }
 
 @media (max-width: 1200px) {
-  .content{
+  .content {
     width: 70%;
     height: 80%;
   }
 
-  .color-picker{
+  .color-picker {
     position: static;
     padding: 1rem 0 2rem;
   }
 }
 
 @media (max-width: 850px) {
-  .content{
+  .content {
     width: 70%;
     height: 70%;
   }
 }
 
 @media (max-width: 650px) {
-  .content{
+  .content {
     width: 90%;
     height: 55%;
   }
