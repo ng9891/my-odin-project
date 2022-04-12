@@ -1,0 +1,79 @@
+:root {
+  --main-bg-color: #e5e6e6;
+  --secondary-bg-color: #c4c4c4;
+  --main-accent-color-dark: #5f86be;
+  --secondary-accent-color-dark: #36366c;
+  --primary-accent-color-light: #c8375c;
+  --secondary-accent-color-light: #fac05b;
+  --main-font-color: black;
+  --secondary-font-color: black;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: var(--main-bg-color);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator {
+  height: 800px;
+  width: 380px;
+  margin: 4rem 0rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1.5fr repeat(4, 1fr) 1.1fr;
+  grid-template-areas: "screen" "screen" "screen" "screen";
+  gap: 0.3rem;
+  height: 100%;
+  border: 0.4rem var(--secondary-accent-color-dark) solid;
+  border-radius: 0.3rem;
+  background-color: var(--secondary-accent-color-dark);
+}
+
+.grid > div {
+  border-radius: 0.2rem;
+  background-color: var(--secondary-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.footer {
+  text-align: center;
+  margin-top: auto;
+  width: 100%;
+  background-color: var(--secondary-bg-color);
+  color: var(--secondary-font-color);
+  padding: 0.5rem;
+  font-size: .8rem;
+  border-top: 1px solid black;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
