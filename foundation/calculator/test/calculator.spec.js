@@ -93,11 +93,11 @@ describe('divide', () => {
 
 describe('operator', () => {
   test('add', () => {
-    expect(calculator.operate('add', 2, 4)).toBe(6);
+    expect(calculator.operate('+', 2, 4)).toBe(6);
   });
 
   test('substraction', () => {
-    expect(calculator.operate('sub', 10, 2)).toBe(8);
+    expect(calculator.operate('-', 10, 2)).toBe(8);
   });
 
   test('random op', () => {
@@ -105,11 +105,11 @@ describe('operator', () => {
   });
 
   test('multiplication', () => {
-    expect(calculator.operate('mult', 10, 2)).toBe(20);
+    expect(calculator.operate('x', 10, 2)).toBe(20);
   });
 
   test('division', () => {
-    expect(calculator.operate('div', 10, 2)).toBe(5);
+    expect(calculator.operate('/', 10, 2)).toBe(5);
   });
 
   test.skip('power', () => {

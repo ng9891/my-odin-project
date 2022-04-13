@@ -28,10 +28,10 @@ const calculator = (() => {
   };
 
   const operate = function(op, num1, num2) {
-    if (op === 'add') return add(num1, num2);
-    if (op === 'sub') return subtract(num1, num2);
-    if (op === 'mult') return multiply([num1, num2]);
-    if (op === 'div') return divide([num1, num2]);
+    if (op === '+') return add(num1, num2);
+    if (op === '-') return subtract(num1, num2);
+    if (op === 'x') return multiply([num1, num2]);
+    if (op === '/') return divide([num1, num2]);
     return;
   };
 

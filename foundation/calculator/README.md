@@ -5,6 +5,6 @@ Link to the project description [here](https://www.theodinproject.com/lessons/fo
 
 [Link to this page](https://ng9891.github.io/my-odin-project/foundation/calculator/)
 
-![preview]()
+![preview](https://drive.google.com/uc?id=1-iUf1TIfw_6kLTxtRMa-E-2Y0cAea4fT)
 
 Author: vT
