@@ -1,25 +1,7 @@
-# The Odin Project by vT
+# The Odin Project - vT
 This repository is used to keep track of my progress and projects of [the Odin Project](https://www.theodinproject.com/) course.
 
-<br />
-
-### Progress
-- [x] Foundation
-  - [x] Intro
-  - [x] Installations
-  - [x] Git Basics
-  - [x] HTML
-  - [x] CSS
-  - [x] Flexbox
-  - [x] Basic JS
-  - [x] Intro to Back End
-- [ ] JS Path
-  - [ ] Intermediate HTML and CSS
-  - [ ] JS
-  - [ ] Advanced HTML and CSS
-  - [ ] NodeJS
-
-<br />
+---
 
 ### Projects
 - Foundation Section
@@ -31,5 +13,42 @@ This repository is used to keep track of my progress and projects of [the Odin P
 - Full Stack JS Path Section
   - TBA
 
-<br />
+---
+
+### Progress
+- [x] Foundation
+  - [x] Intro
+  - [x] Installations
+  - [x] Git Basics
+  - [x] HTML
+  - [x] CSS
+  - [x] Flexbox
+  - [x] Basic JS
+  - [x] Intro to Backend
+- [ ] JS Path
+  - [ ] Intermediate HTML and CSS
+    - [ ] HTML
+    - [ ] CSS
+    - [ ] Grid
+  - [ ] JS
+    - [ ] Async JS
+    - [ ] Testing
+    - [ ] Git
+    - [ ] ReactJS
+    - [ ] Backend
+  - [ ] Advanced HTML and CSS
+    - [ ] Animation
+    - [ ] Accessiblity
+    - [ ] Responsive Design
+  - [ ] NodeJS
+    - [ ] Intro
+    - [ ] MongoDB
+    - [ ] Express & Mongoose
+    - [ ] Authentication
+    - [ ] APIs
+    - [ ] Testing Express
+  - [ ] Final Project
+
+---
+
 Author: vT
