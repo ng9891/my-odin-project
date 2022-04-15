@@ -27,7 +27,7 @@ This repository is used to keep track of my progress and projects of [the Odin P
   - [x] Intro to Backend
 - [ ] JS Path
   - [ ] Intermediate HTML and CSS
-    - [ ] HTML
+    - [x] HTML
     - [ ] CSS
     - [ ] Grid
   - [ ] JS
