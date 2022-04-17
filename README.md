@@ -6,12 +6,12 @@ This repository is used to keep track of my progress and projects of [the Odin P
 ### Projects
 - Foundation Section
   - [Landing Page](https://github.com/ng9891/my-odin-project/tree/main/foundation/landing_page)
-  - [Test Driven Development](https://github.com/ng9891/my-odin-project/tree/main/foundation/test_20drive_dev)
+  - [Test Driven Development](https://github.com/ng9891/my-odin-project/tree/main/foundation/test_drive_dev)
   - [Rock Paper Scissors](https://github.com/ng9891/my-odin-project/tree/main/foundation/rock_paper_scissor)
   - [Etch-A-Sketch](https://github.com/ng9891/my-odin-project/tree/main/foundation/etch_a_sketch)
   - [Calculator](https://github.com/ng9891/my-odin-project/tree/main/foundation/calculator)
 - Full Stack JS Path Section
-  - TBA
+  - [Sign-up Page](https://github.com/ng9891/my-odin-project/tree/main/foundation/sign_up_page)
 
 ---
 
@@ -28,7 +28,7 @@ This repository is used to keep track of my progress and projects of [the Odin P
 - [ ] JS Path
   - [ ] Intermediate HTML and CSS
     - [x] HTML
-    - [ ] CSS
+    - [x] CSS
     - [ ] Grid
   - [ ] JS
     - [ ] Async JS
