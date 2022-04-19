@@ -11,7 +11,7 @@ This repository is used to keep track of my progress and projects of [the Odin P
   - [Etch-A-Sketch](https://github.com/ng9891/my-odin-project/tree/main/foundation/etch_a_sketch)
   - [Calculator](https://github.com/ng9891/my-odin-project/tree/main/foundation/calculator)
 - Full Stack JS Path Section
-  - [Sign-up Page](https://github.com/ng9891/my-odin-project/tree/main/foundation/sign_up_page)
+  - [Sign-up Page](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/sign_up_page)
 
 ---
 

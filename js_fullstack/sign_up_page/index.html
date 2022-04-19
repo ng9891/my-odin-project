@@ -28,13 +28,43 @@
         <br><br>
         <p>You <em>know</em> you want to.</p>
       </div>
-      <form class="form">
-        <p>Let's Do this!</p>
+      <form id="myForm" class="form" action="">
+        <p class="form-description">Let's Do this!</p>
         <div class="form-control">
-          <label for="name">Name</label>
-          <input type="text" name="name" id="name" autocomplete="name">
+          <label for="name">First Name</label>
+          <input type="text" required name="name" id="name" autocomplete="cc-given-name" />
+          <div class="error"></div>
+        </div>
+        <div class="form-control">
+          <label for="last-name">Last Name</label>
+          <input type="text" required name="last-name" id="last-name" autocomplete="family-name" />
+          <div class="error"></div>
+        </div>
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input type="email" required name="email" id="email" autocomplete="email" />
+          <div class="error"></div>
+        </div>
+        <div class="form-control">
+          <label for="tel">Phone Number</label>
+          <input type="tel" name="tel" id="tel" autocomplete="tel" />
+          <div class="error"></div>
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" required name="password" id="password" autocomplete="new-password" />
+          <div class="error"></div>
+        </div>
+        <div class="form-control">
+          <label for="password2">Confirm Password</label>
+          <input type="password" required name="password2" id="password2" autocomplete="new-password" />
+          <div class="error"></div>
         </div>
       </form>
+      <div class="form-button">
+        <button class="submit-btn" type="submit" value="Submit" form="myform">Submit</button>
+        <span>Already have an account? <a href="#">Log in</a></span>
+      </div>
     </div>
   </main>
   <footer>
