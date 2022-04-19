@@ -87,7 +87,7 @@ main {
   --padding-bottom: 2rem;
 }
 
-.content-container .description{
+.content-container .description {
   font-size: calc(var(--font-size) + 0.2rem);
 }
 
@@ -113,15 +113,40 @@ main {
 .form-control {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: 2rem;
   width: 25ch;
 }
 
-.form input {
+.form-control input {
   width: 100%;
-  height: 2rem;
+  height: 3rem;
   font-size: var(--font-size);
   border-radius: 0.3rem;
+  padding: 1rem;
+}
+
+.form-control input:focus {
+  outline: 0;
+}
+
+.form-control.validated input:valid {
+  border: 3px solid #09c372;
+}
+
+.form-control.validated input:invalid {
+  border: 3px solid #ff3860;
+}
+
+.form-control .error {
+  display: none;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  height: 1rem;
+}
+
+.form-control.validated .error {
+  display: block;
+  color: #ff3860;
 }
 
 .form-button {
@@ -235,8 +260,8 @@ footer {
 
   .content-container .form {
     padding-right: 25%;
-    padding-bottom: 0%;
-    margin-bottom: 5%;
+    padding-bottom: 2%;
+    margin-bottom: 1%;
   }
 
   .form-control {
@@ -244,7 +269,6 @@ footer {
   }
 
   .content-container .form-button {
-    padding-top: 0rem;
+    padding-top: 1rem;
   }
-
 }
