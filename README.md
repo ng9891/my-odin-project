@@ -12,6 +12,7 @@ This repository is used to keep track of my progress and projects of [the Odin P
   - [Calculator](https://github.com/ng9891/my-odin-project/tree/main/foundation/calculator)
 - Full Stack JS Path Section
   - [Sign-up Page](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/sign_up_page)
+  - [Admin Dashboard](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/admin_dashboard_page)
 
 ---
 
@@ -26,10 +27,10 @@ This repository is used to keep track of my progress and projects of [the Odin P
   - [x] Basic JS
   - [x] Intro to Backend
 - [ ] JS Path
-  - [ ] Intermediate HTML and CSS
+  - [x] Intermediate HTML and CSS
     - [x] HTML
     - [x] CSS
-    - [ ] Grid
+    - [x] Grid
   - [ ] JS
     - [ ] Async JS
     - [ ] Testing

@@ -1,5 +1,5 @@
 # Admin Dashboard - The Odin Project - JavaScript Path
-Recreation of an admin dashboard from an image ideally using CSS grid, and CSS flexbox if desired.
+Recreation of an admin dashboard from an image ideally using CSS grid and flexbox with own style and theme.
 
 Link to the project description [here](https://www.theodinproject.com/lessons/node-path-intermediate-html-and-css-admin-dashboard)
 
