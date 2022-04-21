@@ -3,7 +3,7 @@ This project is intended to give students a chance to use some of the new CSS an
 
 Link to the project description [here](https://www.theodinproject.com/lessons/node-path-intermediate-html-and-css-sign-up-form)
 
-[Link to this page](https://ng9891.github.io/my-odin-project/js_fullstack/sign_up_page/)
+[Live Demo](https://ng9891.github.io/my-odin-project/js_fullstack/sign_up_page/)
 
 ![preview](https://drive.google.com/uc?id=1uWMuvJkWajCO0KxzR_IvhhsULVWO55I-)
 
