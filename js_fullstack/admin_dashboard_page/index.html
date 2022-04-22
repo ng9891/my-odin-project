@@ -6,6 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>vT's Admin Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="index.js" defer></script>
 </head>
@@ -13,81 +16,117 @@
 <body>
   <div class="container">
     <header>
-      Header
-      <div>Search Bar</div>
+      <div class="search-bar">
+        <label for="search"><img src="./assets/magnify.svg" alt=""></label>
+        <input type="search" name="search" id="search">
+      </div>
+      <div class="profile">
+        <img src="./assets/bell-ring-outline.svg" alt="">
+        <img src="./assets/vtslogo3.svg" alt="">
+        <div class="name">David Copperfield</div>
+      </div>
+      <div class="greeting">
+        <img src="./assets/vtslogo3.svg" alt="">
+        <div>
+          <h5>Hi There!</h5>
+          <h3>David Copperfield!</h3>
+        </div>
+      </div>
+      <div class="action-btn">
+        <button>New</button>
+        <button>Upload</button>
+        <button>Share</button>
+      </div>
     </header>
-    <nav>Nav
-      <div>Name section</div>
-    </nav>
     <div class="sidebar">
-      Side Bar
-      <div>
-        <div>Dashboard</div>
+      <div class="logo">
+        <img src="./assets/view-dashboard-variant.svg" alt="dashboard icon">
+        <h1>Dashboard</h1>
       </div>
       <div>
-        <div>Home</div>
-        <div>Profile</div>
-        <div>Messages</div>
-        <div>History</div>
-        <div>Tasks</div>
-        <div>Comunities</div>
+        <ul>
+          <li>
+            <img src="./assets/home-variant.svg" alt="home icon">
+            Home
+          </li>
+          <li><img src="./assets/card-account-details-outline.svg" alt="profile icon">
+            Profile</li>
+          <li><img src="./assets/message-text.svg" alt="messages icon">
+            Messages</li>
+          <li><img src="./assets/clock.svg" alt="history icon">
+            History</li>
+          <li><img src="./assets/note-multiple.svg" alt="tasks icon">
+            Tasks</li>
+          <li><img src="./assets/account-multiple.svg" alt="Communities icon">
+            Communities</li>
+        </ul>
       </div>
       <div>
-        <div>Settings</div>
-        <div>Support</div>
-        <div>Privacy</div>
+        <ul>
+          <li>
+            <img src="./assets/cog.svg" alt="settings icon">Settings
+          </li>
+          <li>
+            <img src="./assets/help-box.svg" alt="support icon">Support
+          </li>
+          <li>
+            <img src="./assets/shield-check.svg" alt="privacy icon">Privacy
+          </li>
+        </ul>
       </div>
     </div>
     <main>
-      <article>
-        <h2>Your Projects</h2>
-        <div class="card-container">
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
-          <div class="card">
-            <h3>title</h3>
-            <div class="content">content</div>
-          </div>
+      <div class="card-container">
+        <div class="card-header">
+          <h3>Your Projects</h3>
         </div>
-      </article>
+        <div class="card">
+          <h4>title</h4>
+          <div class="content">orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. </div>
+        </div>
+        <div class="card">
+          <h4>title</h4>
+          <div class="content">orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+            . </div>
+        </div>
+        <div class="card">
+          <h4>title</h4>
+          <div class="content">content</div>
+        </div>
+        <div class="card">
+          <h4>title</h4>
+          <div class="content">content</div>
+        </div>
+        <div class="card">
+          <h4>title</h4>
+          <div class="content">content</div>
+        </div>
+        <div class="card">
+          <h4>title</h4>
+          <div class="content">content</div>
+        </div>
+        <!-- <div class="card">
+          <h4>title</h4>
+          <div class="content">content</div>
+        </div>
+        <div class="card">
+          <h4>title</h4>
+          <div class="content">content</div>
+        </div> -->
+      </div>
     </main>
     <aside>
-      <div>Announcements</div>
-      <div>Trending</div>
+      <h3>Announcement</h3>
+      <div>
+        CONTENT
+      </div>
+      <h3>Trending</h3>
+      <div>
+        Content
+      </div>
     </aside>
   </div>
 </body>
