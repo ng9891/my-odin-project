@@ -5,7 +5,7 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-:root.light {
+:root[data-theme = "light"] {
   --color-background-main: white;
   --color-background-secondary: #275dad;
   --color-background-tertiary: rgb(230, 227, 227);
@@ -16,9 +16,21 @@
   --color-font-secondary: white;
 }
 
+:root[data-theme = "dark"] {
+  --color-background-main: #50514f;
+  --color-background-secondary: #333533;
+  --color-background-tertiary: #252422;
+  --color-accent-main: #eb5e28;
+  --color-accent-secondary: #eb5e28;
+  --color-accent-tertiary: #2b2d42;
+  --color-font-primary: #fffcf2;
+  --color-font-secondary: white;
+}
+
 body {
   height: 100vh;
   background-color: var(--color-background-main);
+  color: var(--color-font-primary);
 }
 
 .container {
@@ -28,10 +40,10 @@ body {
   grid-template-rows: 0.2fr 2fr;
   grid-template-areas: "sidebar header header" "sidebar main aside";
 
-  --grid-border-radious: 1rem;
+  --grid-border-radious: 0.5rem;
   --grid-container-padding: 1.3rem;
   --grid-gap: 2rem 1rem;
-  --grid-card-padding: 1.5rem;
+  --grid-card-padding: 1.3rem;
   --h2-margin-bottom: 0.4rem;
   --base-transition: all 0.2s ease-in-out;
   --sidebar-collapsed-width: 4.5rem;
@@ -42,13 +54,13 @@ header {
   grid-area: header;
   display: flex;
   flex-wrap: wrap;
-  padding: 1rem;
+  padding: 0.5rem 2rem;
 }
 
 header > div {
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0 1rem 0.25rem 1rem;
 }
 
 header > div:nth-child(2n-1) {
@@ -64,6 +76,15 @@ header .search-bar input {
   transition: var(--base-transition);
 }
 
+:root[data-theme="dark"] header .search-bar input {
+  background: var(--color-font-primary);
+  border: 1px solid var(--color-font-primary);
+}
+
+:root[data-theme="dark"] header .search-bar label {
+  filter: invert(1);
+}
+
 header .search-bar input:focus {
   width: 100%;
 }
@@ -74,8 +95,20 @@ header .profile {
   width: 40%;
 }
 
-header .profile img:nth-child(2) {
-  border: 1px solid black;
+header .profile > img {
+  cursor: pointer;
+}
+
+header .profile > img:nth-child(3) {
+  background-color: var(--color-font-secondary);
+}
+
+:root[data-theme="dark"] header .profile > img:not(:nth-child(3)) {
+  filter: invert(1);
+}
+
+header .profile img:nth-child(3) {
+  border: 1px solid var(--color-font-primary);
   border-radius: 50%;
   height: 2.5rem;
   width: 2.5rem;
@@ -86,10 +119,14 @@ header .greeting {
 }
 
 header .greeting img {
-  border: 1px solid black;
+  border: 1px solid var(--color-font-primary);
   border-radius: 50%;
   height: 5rem;
   width: 5rem;
+}
+
+:root[data-theme="dark"] header .greeting img {
+  background-color: var(--color-font-secondary);
 }
 
 header .greeting div {
@@ -106,7 +143,7 @@ header .action-btn {
 }
 
 header .action-btn button {
-  width: clamp(80px, 100px, 28%);
+  width: clamp(90px, 100px, 28%);
   height: 2rem;
   border-radius: var(--grid-border-radious);
   background-color: var(--color-background-secondary);
@@ -185,11 +222,40 @@ aside {
 }
 
 aside > div {
-  flex: 1;
   background: var(--color-background-main);
-  display: grid;
   border-radius: var(--grid-border-radious);
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fit, minmax(auto, 1fr));
+  padding: 0.5rem;
+}
+
+aside > h3 {
+  padding-bottom: 1rem;
+}
+
+aside .card {
+  padding: 0.5rem 1rem;
+  background: var(--color-background-main);
+  transition: var(--base-transition);
+}
+
+aside .card:hover {
+  transform: scale(1.03);
+}
+
+aside .card + .card {
+  border-top: 2px solid var(--color-background-tertiary);
+}
+
+aside .card a {
+  text-decoration: none;
+  color: var(--color-accent-secondary);
+}
+
+aside .card span {
+  font-size: 0.8rem;
 }
 
 main {
@@ -211,28 +277,47 @@ main {
   grid-column: 1 / -1;
 }
 
-.card-container > div:not(.cards-header) {
+.card-container .card {
   background-color: var(--color-background-main);
   border-radius: var(--grid-border-radious);
   padding: var(--grid-card-padding);
   display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.1fr auto 0.1fr;
+  gap: 1rem;
+  box-shadow: 0.4rem 0px 0px var(--color-accent-main) inset;
+  transition: var(--base-transition);
 }
 
-.card-container .card {
+.card-container .card h2{
+  margin: 0
+}
+
+.card-container > div.card:hover {
+  transform: scale(1.01);
+}
+
+.card-container .card .content {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 3fr 0.5fr;
-  gap: 1rem;
+  grid-template-rows: auto 1fr;
+  gap: 0.5rem;
+}
+
+.card-container .card .content > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
 .card-container .card .btn-container {
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
+  height: 2rem;
 }
 
-.card-container .card .btn-container img{
-  cursor: pointer;
+:root[data-theme="dark"] .card-container .card .btn-container img {
+  filter: invert(1);
 }
 
 /* BEGIN sidebar collapse */
@@ -261,7 +346,7 @@ main {
   .container {
     grid-template-columns: auto 1fr;
     grid-template-rows: 0.4fr 1fr 2fr;
-    grid-template-areas: "sidebar header" "sidebar aside" "sidebar main";
+    grid-template-areas: "sidebar header" "sidebar main" "sidebar aside";
   }
 
   aside {
@@ -277,8 +362,14 @@ main {
   header > div {
     padding: 0;
   }
+
   header .profile .name {
     display: none;
+  }
+
+  header div:nth-child(3) {
+    margin-top: 1rem;
+    justify-content: center;
   }
 
   header .action-btn {
