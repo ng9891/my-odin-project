@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>vT's Library</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="./style.css">
+      <script src="index.js" defer></script>
+   </head>
+   <body>
+      <header>
+         <h1>Library</h1>
+         <div class="sign-btn"><span>Sign In</span></div>
+      </header>
+      <main>
+         <div class="add-btn">
+            <div>+</div>
+         </div>
+         <div class="card-container">
+            <div class="card">
+              <div>header</div>
+              <div><h2>
+                asdjflsjd flskjdfalsjdflasjdflajs lqweqweqweqweqweqwe qweqweqweqweqwasdasd
+              </h2></div>
+              <div>button</div>
+            </div>
+            <div class="card">
+              <div class="title">very long title very long title very long title</div>
+              <div class="author">very long author very long author very lo</div>
+              <div class="btn-container">
+                <button>Mark as unread</button>
+                <button>Remove</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="title">very long title very long title very long title very long title very long title very long title very long title</div>
+              <div class="author">very long author very long author very long author very long author very long author very long author very long author very long author</div>
+              <div class="btn-container">
+                <button></button>
+              </div>
+            </div>
+         </div>
+      </main>
+      <dialog class="modal" id="submit-book">
+         <div class="modal-container">
+            <div class="close-modal-btn">X</div>
+            <h2>Add a new book</h2>
+            <form action="" method="dialog">
+               <div class="form-control">
+                  <label for="title">Book title</label>
+                  <input type="text" name="" id="title" required minlength="3">
+               </div>
+               <div class="form-control">
+                  <label for="author">Author</label>
+                  <input type="text" name="author" id="author" required minlength="3">
+               </div>
+               <div class="form-control">
+                  <label for="read">Finished</label>
+                  <select name="read" id="read">
+                     <option value="no" selected>No</option>
+                     <option value="yes">Yes</option>
+                  </select>
+               </div>
+               <button type="submit" value="">Submit
+            </form>
+         </div>
+      </dialog>
+      <footer>
+         Developed by vT <a href="https://github.com/ng9891/"><img src="./assets/github.svg" alt=""></a>
+      </footer>
+   </body>
+</html>
