@@ -14,35 +14,14 @@
    <body>
       <header>
          <h1>Library</h1>
-         <div class="sign-btn"><span>Sign In</span></div>
+         <div class="dummy"><span>Add Dummy</span></div>
       </header>
       <main>
          <div class="add-btn">
             <div>+</div>
          </div>
          <div class="card-container">
-            <div class="card">
-              <div>header</div>
-              <div><h2>
-                asdjflsjd flskjdfalsjdflasjdflajs lqweqweqweqweqweqwe qweqweqweqweqwasdasd
-              </h2></div>
-              <div>button</div>
-            </div>
-            <div class="card">
-              <div class="title">very long title very long title very long title</div>
-              <div class="author">very long author very long author very lo</div>
-              <div class="btn-container">
-                <button>Mark as unread</button>
-                <button>Remove</button>
-              </div>
-            </div>
-            <div class="card">
-              <div class="title">very long title very long title very long title very long title very long title very long title very long title</div>
-              <div class="author">very long author very long author very long author very long author very long author very long author very long author very long author</div>
-              <div class="btn-container">
-                <button></button>
-              </div>
-            </div>
+
          </div>
       </main>
       <dialog class="modal" id="submit-book">
@@ -52,7 +31,7 @@
             <form action="" method="dialog">
                <div class="form-control">
                   <label for="title">Book title</label>
-                  <input type="text" name="" id="title" required minlength="3">
+                  <input type="text" name="title" id="title" required minlength="3">
                </div>
                <div class="form-control">
                   <label for="author">Author</label>
@@ -61,8 +40,8 @@
                <div class="form-control">
                   <label for="read">Finished</label>
                   <select name="read" id="read">
-                     <option value="no" selected>No</option>
-                     <option value="yes">Yes</option>
+                     <option value="unread" selected>No</option>
+                     <option value="read">Yes</option>
                   </select>
                </div>
                <button type="submit" value="">Submit

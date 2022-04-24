@@ -41,6 +41,13 @@ const PROJECTS = {
       "link": "http://ng9891.github.io/my-odin-project/js_fullstack/admin_dashboard_page/",
       "img": "https://storage.googleapis.com/picboi-39298.appspot.com/final/7OmtGxds_1000x800",
       "desc": "Recreation of an admin dashboard from an image using CSS grid and flexbox."
-    }
+    },
+    {
+      "name": "Library App",
+      "github": "https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/library_project",
+      "link": "https://ng9891.github.io/my-odin-project/js_fullstack/library_project/",
+      "img": "https://storage.googleapis.com/picboi-39298.appspot.com/final/8uaA8AvY_1000x800",
+      "desc": "Small Library app to keep track of finished and to be finished books.",
+    },
   ]
 }

@@ -9,6 +9,7 @@
   --color-main-100: #f1faee;
   --color-main-200: #14213d;
   --color-light-500: rgba(252, 163, 17, 1);
+  --color-light-800: #43aa8b;
 
   --color-fc-main: black;
   --color-fc-secondary: white;
@@ -25,7 +26,7 @@ body {
 }
 
 header {
-  height: min(20%, 150px);
+  min-height: min(18%, 150px);
   background-color: var(--color-main-200);
   color: var(--color-fc-secondary);
   display: flex;
@@ -34,11 +35,11 @@ header {
   padding: 0 5rem;
 }
 
-header .sign-btn {
+header .dummy {
   cursor: pointer;
   background-color: var(--color-light-500);
   color: var(--color-fc-main);
-  width: clamp(100px, 80%, 100px);
+  width: clamp(100px, 30%, 150px);
   height: 2rem;
   border-radius: 0.4rem;
   text-align: center;
@@ -46,7 +47,7 @@ header .sign-btn {
   opacity: 0.9;
 }
 
-header .sign-btn:hover {
+header .dummy:hover {
   opacity: 1;
 }
 
@@ -77,16 +78,56 @@ main .add-btn:hover {
 main .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
-  grid-template-rows: 1fr 1fr;
   grid-gap: 1.5rem;
+  width: 100%;
 }
 
-main .card {
+.card-container .card {
+  min-height: min(300px, 40vh);
   border: 1px black solid;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   overflow-wrap: anywhere;
+  box-shadow: 0.4rem 0px 0px var(--color-light-500) inset;
+  border-radius: 5px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.card-container .card.read {
+  box-shadow: 0.4rem 0px 0px var(--color-light-800) inset;
+}
+
+.card-container .card .title {
+  /* flex: 1; */
+  font-weight: var(--font-weight);
+  font-size: 1.3rem;
+}
+
+.card-container .card .author {
+  font-size: 0.8rem;
+}
+
+.card-container .card .btn-container {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.card-container .card .btn-container button {
+  height: 2rem;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.card-container .card .btn-container button:active,
+.card-container .card .btn-container button:hover {
+  background-color: var(--color-main-200);
+  color: var(--color-fc-secondary)
 }
 
 /* https://youtu.be/4prVdA7_6u0 */
@@ -142,6 +183,7 @@ main .card {
 }
 
 .modal-container form > button {
+  cursor: pointer;
   margin: 1.3rem 0;
   width: 100%;
   height: 2rem;
@@ -157,6 +199,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 0.5rem;
 }
 
 @keyframes fade-in {
