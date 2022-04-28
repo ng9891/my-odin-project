@@ -7,16 +7,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tic Tac Toe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css">
   <script src="index.js" defer></script>
+  <script src="minimax.js" defer></script>
 </head>
 
 <body>
+  <div class="announce hide">
+    <div class="win hide">Player 1 Won</div>
+    <div class="draw hide">It's a Draw</div>
+  </div>
   <div class="container">
-    <header>HEADER</header>
-    <div class="icon">ICON</div>
+    <header><h1>Tic Tac Toe</h1></header>
+    <div class="btn-container">
+      <div class="p1">
+        <div class="ptype">
+          <span class="turn">Player 1</span>
+          <button class="selected">Player</button>
+          <button>Bot</button>
+        </div>
+      </div>
+      <div class="p2">
+        <div class="ptype">
+          <span>Player 2</span>
+          <button>Player</button>
+          <button class="selected">Bot</button>
+        </div>
+      </div>
+    </div>
     <div class="board-container">
       <div class="grid">
         <div data-pos="0,0"></div>
@@ -29,8 +49,8 @@
         <div data-pos="2,1"></div>
         <div data-pos="2,2"></div>
       </div>
+      <button class="reset-btn">Restart</button>
     </div>
-    <button class="reset-btn">Reset</button>
     <footer>
       Made by vT <a href="https://github.com/ng9891/"><img src="./assets/github.svg" alt=""></a>
     </footer>

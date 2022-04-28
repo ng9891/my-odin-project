@@ -2,17 +2,21 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Varela Round', sans-serif;
 }
 
 :root {
   --color-main-100: #f1faee;
   --color-main-200: #14213d;
-  --color-light-500: rgba(252, 163, 17, 1);
-  --color-light-800: #43aa8b;
+  --color-light-500: #ee9b00;
+  --color-light-600: #e9d8a6;
+  --color-light-800: #94d2bd;
+
+  --color-win: #9b2226;
 
   --color-fc-main: black;
   --color-fc-secondary: white;
+  --color-fc-active: #ae2012;
   --font-weight: bold;
 }
 
@@ -21,22 +25,100 @@
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  transition: filter 0.1s linear;
+}
+
+.container.blur {
+  filter: blur(0.5rem);
+}
+
+.announce {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-fc-main);
+  height: 100vh;
+  width: 100%;
+  font-size: 10ch;
+  z-index: 1;
+  text-shadow: 1px 1px;
+}
+
+.hide {
+  display: none;
 }
 
 header {
-  grid-area: header;
-  background-color: var(--color-main-200);
-  height: 10%;
+  min-height: 10%;
   width: 100%;
-  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  background-color: var(--color-main-200);
+  color: var(--color-fc-secondary);
 }
 
-.icon {
-  grid-area: icon;
+.btn-container {
+  padding-inline: 25%;
+  padding-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-container span {
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+  transition: opacity 0.5s ease-in;
+}
+
+.btn-container span.turn {
+  color: var(--color-fc-active);
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0.3rem;
+  font-weight: bold;
+  opacity: 1;
+}
+
+.btn-container > div .ptype {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.btn-container > div button {
+  cursor: pointer;
+  width: min(100px, 100%);
+  padding: 0.5rem;
+  background-color: var(--color-light-800);
+  opacity: 0.4;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-container > div button.selected {
+  background-color: var(--color-light-800);
+  opacity: 1;
+  border: 2px solid black;
 }
 
 .board-container {
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reset-btn {
+  margin: 1rem 0;
+  width: min(100px, 25%);
+  padding: 0.2rem;
+  background-color: var(--color-light-600);
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .grid {
@@ -61,18 +143,13 @@ header {
 }
 
 .grid > div.win {
-  color: var(--color-main-100);
-}
-
-.reset-btn {
-  margin-bottom: 1rem;
-  width: min(100px, 20%);
-  padding: 0.2rem;
-  background-color: var(--color-light-800);
+  color: var(--color-win);
 }
 
 footer {
   margin-top: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 @media only screen and (max-width: 950px) {
@@ -83,5 +160,13 @@ footer {
 
   .grid > div {
     font-size: 3rem;
+  }
+
+  .btn-container {
+    padding-inline: 10%;
+  }
+
+  .announce {
+    font-size: 2.3rem;
   }
 }

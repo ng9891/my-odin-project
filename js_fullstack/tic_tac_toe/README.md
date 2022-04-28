@@ -5,6 +5,6 @@ Link to the project description [here](https://www.theodinproject.com/lessons/no
 
 [Live Demo](https://ng9891.github.io/my-odin-project/js_fullstack/tic_tac_toe/)
 
-![preview]()
+![preview](https://storage.googleapis.com/picboi-39298.appspot.com/final/LflhHum1_1000x800)
 
 Author: vT

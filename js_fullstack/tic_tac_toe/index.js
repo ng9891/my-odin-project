@@ -27,6 +27,10 @@
       return ended;
     };
 
+    const getPlayers = () => {
+      return {p1: player1, p2: player2};
+    };
+
     const setPlayer = (Player, num) => {
       if (num === 1) {
         if (player1) {
@@ -55,6 +59,7 @@
     const nextTurn = () => {
       if (!currentTurn) currentTurn = player1;
       currentTurn = currentTurn === player1 ? player2 : player1;
+      return currentTurn;
     };
 
     // https://stackoverflow.com/a/1058804
@@ -87,14 +92,13 @@
       gameBoardArr[x][y] = currPlayer;
       playCount += 1;
 
-      console.log(gameBoardArr);
-
       // Check for winning condition;
       return _checkWin(currPlayer, x, y);
     };
 
     return {
       getBoardSize,
+      getPlayers,
       setPlayer,
       nextTurn,
       getCurrentTurn,
@@ -105,13 +109,16 @@
     };
   })(BOARD_SIZE);
 
-  const Player = (name, icon) => {
+  const Player = (name, icon, bot = false) => {
     let playerIcon = icon;
+    // let botPlayer = bot;
     const getName = () => name;
     const setIcon = (icon) => (playerIcon = icon);
     const getIcon = () => playerIcon;
+    const setToBot = (isBot) => (bot = isBot);
+    const isBot = () => bot;
 
-    return {getName, getIcon, setIcon};
+    return {getName, getIcon, setIcon, setToBot, isBot};
   };
 
   const markWinner = (winLocation, x, y) => {
@@ -128,24 +135,68 @@
     }
   };
 
-  const handleClick = (e) => {
-    const content = e.target.textContent;
-    if (content) return;
-    if (titTacToe.isGameEnded()) return alert('Game Ended');
-    const currPlayer = titTacToe.getCurrentTurn();
-    e.target.textContent = currPlayer.getIcon();
+  const announceResult = (player, loc) => {
+    const container = document.querySelector('.container');
+    const announce = document.querySelector('.announce');
+    announce.classList.remove('hide');
+    container.classList.add('blur');
+    if (loc === 'draw') {
+      return announce.lastElementChild.classList.remove('hide');
+    }
 
-    let pos = e.target.getAttribute('data-pos');
-    const [x, y] = pos.split(',');
+    announce.firstElementChild.textContent = `${player.getName()} has Won!`;
+    announce.firstElementChild.classList.remove('hide');
+  };
+
+  const handleBotPlay = () => {
+    console.log('BOt Playing NOW!');
+  };
+
+  const changePlayerTurn = () => {
+    const currPlayer = titTacToe.getCurrentTurn();
+    const nextPlayer = titTacToe.nextTurn();
+
+    if (nextPlayer.isBot()) handleBotPlay();
+  };
+
+  const playPosition = (x, y, el) => {
+    if (titTacToe.isGameEnded()) return;
+    const currPlayer = titTacToe.getCurrentTurn();
+    el.textContent = currPlayer.getIcon();
+
     const location = titTacToe.playPosition(x, y);
-    console.log(location);
     if (location) {
       titTacToe.endBoard();
       markWinner(location, x, y);
-      if (location === 'draw') alert(`A draw!`);
-      else alert(`${currPlayer.getName()} Won! on ${location} at pos ${[x, y]}`);
+      announceResult(currPlayer, location);
     }
-    titTacToe.nextTurn();
+
+    changePlayerTurn();
+  };
+
+  const handlePlay = (e) => {
+    const content = e.target.textContent;
+    if (content) return;
+    const pos = e.target.getAttribute('data-pos');
+    const [x, y] = pos.split(',');
+    playPosition(x, y, e.target);
+  };
+
+  const changePlayerType = (e) => {
+    const playerToChange = e.target.parentNode.parentNode.className;
+    const setToType = e.target.textContent;
+    const {p1, p2} = titTacToe.getPlayers();
+
+    let player = playerToChange === 'p1' ? p1 : p2;
+    if (setToType === 'Bot') {
+      player.setToBot(true);
+      e.target.previousElementSibling.classList.remove('selected');
+    } else {
+      player.setToBot(false);
+      e.target.nextElementSibling.classList.remove('selected');
+    }
+    e.target.classList.add('selected');
+    handleReset();
   };
 
   const handleReset = () => {
@@ -158,14 +209,26 @@
   };
 
   const main = () => {
-    const grid = document.querySelector('.container .board-container .grid');
-    grid.addEventListener('click', handleClick);
+    const announce = document.querySelector('.announce');
+    announce.addEventListener('click', (e) => {
+      const announcement = document.querySelector('.announce >div:not(.hide)');
+      if (announcement) announcement.classList.add('hide');
+      announce.classList.add('hide');
+      const container = document.querySelector('.container');
+      container.classList.remove('blur');
+    });
+
+    const grid = document.querySelector('.grid');
+    grid.addEventListener('click', handlePlay);
+
+    const playerBtns = document.querySelectorAll('.btn-container button');
+    playerBtns.forEach((el) => el.addEventListener('click', changePlayerType));
 
     const resetBtn = document.querySelector('.reset-btn');
     resetBtn.addEventListener('click', handleReset);
 
-    const p1 = Player('David', 'X');
-    const p2 = Player('Bot', 'O');
+    const p1 = Player('Player 1', 'X');
+    const p2 = Player('Player 2', 'O', true);
 
     titTacToe.setPlayer(p1, 1);
     titTacToe.setPlayer(p2, 2);
