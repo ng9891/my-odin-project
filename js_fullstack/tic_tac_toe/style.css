@@ -35,9 +35,8 @@ header {
   grid-area: icon;
 }
 
-
-.board-container{
-  margin-bottom: 2rem;
+.board-container {
+  margin-bottom: 1rem;
 }
 
 .grid {
@@ -54,16 +53,35 @@ header {
 
 .grid > div {
   background-color: var(--color-light-500);
+  font-size: 4rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-footer{
+.grid > div.win {
+  color: var(--color-main-100);
+}
+
+.reset-btn {
+  margin-bottom: 1rem;
+  width: min(100px, 20%);
+  padding: 0.2rem;
+  background-color: var(--color-light-800);
+}
+
+footer {
   margin-top: auto;
 }
 
-
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 950px) {
   .grid {
     width: 40vh;
     height: 40vh;
+  }
+
+  .grid > div {
+    font-size: 3rem;
   }
 }
