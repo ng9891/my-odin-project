@@ -1,5 +1,5 @@
 # Tic Tac Toe - The Odin Project - JavaScript Path
-Implementation of the classic Tic Tac Toe game applying factory and module functions.
+Implementation of the classic Tic Tac Toe game applying factory and module functions. AI is programmed using the [minimax alpha-beta prunning](https://en.wikipedia.org/wiki/Minimax) algorithm.
 
 Link to the project description [here](https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe)
 

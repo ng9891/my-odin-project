@@ -14,6 +14,7 @@ This repository is used to keep track of my progress and projects of [the Odin P
   - [Sign-up Page](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/sign_up_page)
   - [Admin Dashboard](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/admin_dashboard_page)
   - [Library App](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/library_project)
+  - [Tic Tac Toe with Minimax](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/tic_tac_toe)
 
 ---
 

@@ -70,17 +70,19 @@ header {
 
 .btn-container span {
   margin-bottom: 0.5rem;
+  padding: 0.3rem;
   opacity: 0.5;
-  transition: opacity 0.5s ease-in;
+  font-weight: bold;
+  border: 1px solid;
+  border-radius: 5px;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .btn-container span.turn {
   color: var(--color-fc-active);
-  border: 1px solid;
-  border-radius: 5px;
-  padding: 0.3rem;
-  font-weight: bold;
   opacity: 1;
+  transform: scale(1.2);
 }
 
 .btn-container > div .ptype {
@@ -91,7 +93,7 @@ header {
 
 .btn-container > div button {
   cursor: pointer;
-  width: min(100px, 100%);
+  width: 100px;
   padding: 0.5rem;
   background-color: var(--color-light-800);
   opacity: 0.4;

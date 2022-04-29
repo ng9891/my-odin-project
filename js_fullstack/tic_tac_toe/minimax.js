@@ -1,4 +1,0 @@
-const minimax = (board, depth) => {
-
-  
-};
