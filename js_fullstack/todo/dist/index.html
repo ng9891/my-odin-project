@@ -1,13 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TODO list</title>
   <script src="index.bundle.js" defer></script>
+  <script src="module.bundle.js" defer></script>
 </head>
+
 <body>
-  <div id="container"></div>
+  <div id="container">
+    <header>
+      <div class="sidebar-btn"><img src="../src/assets/menu.svg" alt=""></div>
+      <div>
+        <h3>TODO List</h3>
+      </div>
+    </header>
+    <div class="backdrop"></div>
+    <nav class="sidebar">
+      <ul>
+        <li class="active"><span>Home</span><span>2</span></li>
+        <li><span>Today</span><span>4</span></li>
+        <li><span>Week</span><span>2</span></li>
+        <li class="projects">
+          <span>Projects</span>
+          <ul class="projects-container">
+            <li class="active"><span>Week</span><span>2</span></li>
+            <li><span>Week</span><span>999</span></li>
+            <li><span>Week</span><span>10</span></li>
+            <li class="active"><span>asdasdasdasdasdasdasdasd</span><span>101</span></li>
+            <li><span>Week Week Week</span><span>9</span></li>
+            <li class="add-project">
+              <img src="../src/assets/plus.svg" alt="">
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="todo-container">
+      <div>
+        <h3>Project Title</h4>
+      </div>
+      <div class="item low">
+        <span class="check"><input type="checkbox"></span>
+        <span class="title">TODO title</span>
+        <div class="date">DueDate</div>
+        <div class="btn-container">
+          <img src="../src/assets/trash-can-outline.svg" alt="">
+        </div>
+      </div>
+      <div class="item med">
+        <span class="check"><input type="checkbox"></span>
+        <span class="title">TODO titleqweqweqweqweqwe</span>
+        <div class="date">DueDate</div>
+        <div class="btn-container">
+          <img src="../src/assets/trash-can-outline.svg" alt="">
+        </div>
+      </div>
+      <div class="item high">
+        <span class="check"><input type="checkbox"></span>
+        <span class="title">TODO</span>
+        <div class="date">DueDate</div>
+        <div class="btn-container">
+          <img src="../src/assets/trash-can-outline.svg" alt="">
+        </div>
+      </div>
+      <div class="item low done">
+        <span class="check"><input type="checkbox" checked></span>
+        <span class="title">TODO</span>
+        <div class="date">DueDate</div>
+        <div class="btn-container">
+          <img src="../src/assets/trash-can-outline.svg" alt="">
+        </div>
+      </div>
+      <div class="item med done">
+        <span class="check"><input type="checkbox" checked></span>
+        <span class="title">TODO titleqweqweqweqweqwe</span>
+        <div class="date">DueDate</div>
+        <div class="btn-container">
+          <img src="../src/assets/trash-can-outline.svg" alt="">
+        </div>
+      </div>
+      <div class="item add-todo">
+        <img src="../src/assets/plus.svg" alt="">
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>

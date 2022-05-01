@@ -1,6 +1,8 @@
 import PubSub from './helper/pubsub';
 import dummyFn from './modules/UI';
 
+import './style.css';
+
 const handleSub = (data) => {
   console.log('Hello from index.js', data);
 };
@@ -17,6 +19,6 @@ const btn = document.createElement('button');
 btn.textContent = 'Click Me! and look at your console!';
 btn.addEventListener('click', handleClick);
 
-container.appendChild(btn);
+// container.appendChild(btn);
 
 PubSub.subscribe('test', handleSub);

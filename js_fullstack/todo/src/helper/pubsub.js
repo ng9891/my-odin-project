@@ -17,13 +17,7 @@ const PubSub = (() => {
 
   const unsubscribe = (eventName, fn) => {
     if (!eventObj[eventName]) return;
-
-    for ([i, eventFn] of eventObj[eventName].entries()) {
-      if (eventFn === fn) {
-        eventObj[eventName].splice(i, 1);
-        break;
-      }
-    }
+    eventObj[eventName].filter((eventFn) => eventFn !== fn);
   };
 
   return {publish, subscribe, unsubscribe};
