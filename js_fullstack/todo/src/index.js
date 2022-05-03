@@ -22,3 +22,22 @@ btn.addEventListener('click', handleClick);
 // container.appendChild(btn);
 
 PubSub.subscribe('test', handleSub);
+
+// Testing modal
+const openModal = ()=>{
+  const modal = document.querySelector('.modal');
+  modal.showModal();
+}
+
+const addTodo = document.querySelector('.add-todo');
+addTodo.addEventListener('click', openModal);
+
+
+// Testing sidebar
+const toggleSidebar  = ()=>{
+  const sidebar = document.querySelector('.sidebar');
+  sidebar.classList.toggle('active')
+}
+
+const sidebarBtn = document.querySelector('.sidebar-btn');
+sidebarBtn.addEventListener('click', toggleSidebar)

@@ -7,10 +7,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TODO list</title>
   <script src="index.bundle.js" defer></script>
-  <script src="module.bundle.js" defer></script>
 </head>
 
 <body>
+  <div class="modals">
+    <dialog class="modal">
+      <div class="modal-container">
+
+        <div class="close-btn">
+          <img src="../src/assets/trash-can-outline.svg" alt="">
+          <img src="../src/assets/close.svg" alt="">
+        </div>
+        <h3>New Task</h3>
+        <div>
+          <form method="dialog">
+            <div class="form-control">
+              <label for="project">Project:</label>
+              <input type="text" name="project" id="project" value="Project Name" readonly>
+            </div>
+            <div class="form-control">
+              <input type="text" name="title" id="title" placeholder="Title">
+            </div>
+            <div class="form-control">
+              <textarea rows="10" name="desc" placeholder="Description"></textarea>
+            </div>
+            <div class="form-control">
+              <label for="due">Due:</label>
+              <input type="date" name="due" id="due">
+            </div>
+            <div class="form-control priority-container">
+              <label><input type="radio" name="priority" value="1" checked><span>Low</span></label>
+              <label><input type="radio" name="priority" value="2"><span>Medium</span></label>
+              <label><input type="radio" name="priority" value="3"><span>High</span></label>
+            </div>
+            <div class="form-control">
+              <button type="submit">Save</button>
+              <button type="button">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </dialog>
+  </div>
   <div id="container">
     <header>
       <div class="sidebar-btn"><img src="../src/assets/menu.svg" alt=""></div>
@@ -40,7 +78,7 @@
       </ul>
     </nav>
     <div class="todo-container">
-      <div>
+      <div class="title">
         <h3>Project Title</h4>
       </div>
       <div class="item low">
@@ -53,7 +91,7 @@
       </div>
       <div class="item med">
         <span class="check"><input type="checkbox"></span>
-        <span class="title">TODO titleqweqweqweqweqwe</span>
+        <span class="title">TODO titleqweqweqweqweqw qwe  qwe qwe qw ee sad qwe asd asdqw dasd qw dasd qwd as d</span>
         <div class="date">DueDate</div>
         <div class="btn-container">
           <img src="../src/assets/trash-can-outline.svg" alt="">
