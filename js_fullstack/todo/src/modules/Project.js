@@ -1,4 +1,4 @@
-const Project = (title) => {
+const Project = (title, completedCount = 0) => {
   const todoArr = [];
 
   const addTodo = (todo) => {
@@ -6,6 +6,7 @@ const Project = (title) => {
   };
 
   const deleteTodo = (todo) => {
+    if (todo.getCompleted()) completedCount -= 1;
     todoArr.filter((el) => el !== todo);
   };
 
@@ -13,12 +14,19 @@ const Project = (title) => {
   const getTodoArr = () => todoArr;
   const getSize = () => todoArr.length;
 
+  const toggleCompleteTask = (todo) => {
+    const completed = todo.toggleCompleted();
+    if (completed) completedCount += 1;
+    else completedCount -= 1;
+  };
+
   return {
     addTodo,
     deleteTodo,
     getTitle,
     getTodoArr,
     getSize,
+    toggleCompleteTask,
   };
 };
 

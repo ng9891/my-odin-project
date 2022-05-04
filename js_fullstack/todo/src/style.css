@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./assets/fonts/Ubuntu-Regular.ttf') format('ttf');
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -21,6 +26,10 @@
   --font-fz-nav: 1.4rem;
   --font-fz-projects: 1rem;
   --font-fz-projects-indicator: 0.75rem;
+}
+
+body {
+  font-family: Ubuntu;
 }
 
 #container {
@@ -99,21 +108,25 @@ nav ul li:not(.projects).active::before {
 }
 
 nav ul li:not(.projects) span:first-of-type {
-  margin-right: 0.5rem;
+  margin-right: auto;
 }
 
 nav ul li:not(.projects) span:last-of-type {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
+  margin-left: 0.5rem;
   border-radius: 50%;
-  min-width: 1.2rem;
-  min-height: 1.2rem;
+  min-width: 1.3rem;
+  min-height: 1.3rem;
   padding: 0.2rem;
   font-size: var(--font-fz-projects-indicator);
   background-color: var(--color-sidebar-indicator);
   color: var(--font-fc-secondary);
+}
+
+nav ul li:not(.projects) span.notodo:last-of-type {
+  visibility: hidden;
 }
 
 nav ul li.projects {
@@ -250,8 +263,7 @@ nav ul .projects-container .add-project {
   gap: 0.5rem;
 }
 
-.modal form .form-control input,
-select {
+.modal form .form-control input {
   width: 100%;
   min-height: 1.6rem;
   border: none;
@@ -264,11 +276,17 @@ select {
   border-radius: 5px;
 }
 
+.modal form input[name='title'] {
+  font-weight: bold;
+}
+
 .modal form textarea {
   height: auto;
   resize: none;
   outline: none;
   border: none;
+  width: 100%;
+  line-height: 1.5;
 }
 
 .modal form input[type='date'] {
@@ -335,7 +353,8 @@ select {
 
 .modal form .form-control:last-of-type > button {
   padding: 0.4rem 1rem;
-  min-width: 35%;
+  width: min(100px, 35%);
+  height: 2.6rem;
   border-radius: 5px;
   outline: none;
 }
@@ -389,7 +408,15 @@ select {
   }
 
   .modal {
-    min-width: 50ch;
+    min-width: 60ch;
+  }
+
+  .modal .modal-container {
+    padding: 2rem;
+  }
+
+  .modal form .form-control:last-of-type > button {
+    margin-top: 1rem;
   }
 }
 @keyframes fade-in {
