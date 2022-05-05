@@ -1,23 +1,39 @@
 const Project = (title, completedCount = 0) => {
-  const todoArr = [];
+  let todoArr = [];
 
   const addTodo = (todo) => {
+    const found = todoArr.find((el) => el === todo);
+    if (found) return alert('Repeated task name');
     todoArr.push(todo);
   };
 
+  const getTodo = (title) => {
+    return todoArr.find((el) => el.getTodo().title === title);
+  };
+
   const deleteTodo = (todo) => {
+    const len = todoArr.length;
+    const filteredArr = todoArr.filter((el) => el !== todo);
+
+    if (len !== 0 && filteredArr.length === len) return false;
+
     if (todo.getCompleted()) completedCount -= 1;
-    todoArr.filter((el) => el !== todo);
+    todoArr = filteredArr;
+    return true;
   };
 
   const getTitle = () => title;
   const getTodoArr = () => todoArr;
-  const getSize = () => todoArr.length;
-
+  
   const toggleCompleteTask = (todo) => {
     const completed = todo.toggleCompleted();
-    if (completed) completedCount += 1;
-    else completedCount -= 1;
+    completedCount = completed ? completedCount + 1 : completedCount - 1;
+    return completed;
+  };
+  
+  const getSize = () => todoArr.length;
+  const getCompletedCount = () => {
+    return completedCount;
   };
 
   return {
@@ -27,6 +43,8 @@ const Project = (title, completedCount = 0) => {
     getTodoArr,
     getSize,
     toggleCompleteTask,
+    getTodo,
+    getCompletedCount,
   };
 };
 

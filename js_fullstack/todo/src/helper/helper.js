@@ -26,7 +26,7 @@ export const createInput = ({label = '', id, type, siblingEl, ...attributes}) =>
 
   const input = document.createElement('input');
   input.setAttribute('type', type);
-  input.setAttribute('id', id);
+  if (id) input.setAttribute('id', id);
   for (const [key, value] of Object.entries(attributes)) {
     input.setAttribute(key, value);
   }
@@ -46,4 +46,21 @@ export const createButton = (type, content, className) => {
   btn.textContent = content;
   if (className) btn.classList.add(className);
   return btn;
+};
+
+export const createImgButton = ({url, className, clickEvent, parentType = 'div', parentClass}) => {
+  const container = document.createElement(parentType);
+  container.classList.add(parentClass);
+
+  const img = document.createElement('img');
+  img.setAttribute('src', url);
+  if (className) img.classList.add(className);
+
+  container.appendChild(img);
+  container.addEventListener('click', clickEvent);
+  return container;
+};
+
+export const formatDate = (date) => {
+  return date;
 };

@@ -1,5 +1,5 @@
-const Todo = (title, desc, due, priority = 3) => {
-  const completed = false;
+const Todo = ({title, desc, due, priority = 1}) => {
+  let completed = false;
   const setTitle = (newTitle) => (title = newTitle);
   const setDesc = (newDesc) => (desc = newDesc);
   const setDue = (newDue) => (due = newDue);
@@ -10,7 +10,7 @@ const Todo = (title, desc, due, priority = 3) => {
     return completed;
   };
   const getTodo = () => {
-    return {title, desc, due, priority};
+    return {title, desc, due, priority, completed};
   };
 
   return {

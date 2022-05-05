@@ -70,7 +70,7 @@ nav {
   position: relative;
   right: 100%;
   transition: right 0.5s ease;
-  padding: 0.3rem;
+  padding: 1rem 0.7rem;
   font-size: var(--font-fz-nav);
   overflow: auto;
 }
@@ -94,10 +94,6 @@ nav ul li {
 nav ul li:not(.projects) {
   display: flex;
   align-items: center;
-}
-
-nav ul li:not(.projects):hover {
-  background-color: var(--color-sidebar-hover);
 }
 
 nav ul li:not(.projects).active::before {
@@ -133,6 +129,10 @@ nav ul li.projects {
   cursor: default;
 }
 
+nav ul li.projects ul li:first-of-type {
+  margin-top: 0.5rem;
+}
+
 nav li ul.projects-container li {
   padding: 0.2rem;
   margin-left: 1rem;
@@ -152,6 +152,11 @@ nav ul .projects-container .add-project {
   padding: 1rem;
 }
 
+.todo-container .projTitle h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
 .todo-container .item {
   display: flex;
   align-items: center;
@@ -164,7 +169,6 @@ nav ul .projects-container .add-project {
   transition: transform 250ms cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
 }
 
-/* box-shadow: 3px 0px 0px green inset; */
 .todo-container .item.low {
   box-shadow: 3px 0px 0px var(--color-todo-low) inset, 2px 2px 2px 0px;
 }
@@ -183,11 +187,14 @@ nav ul .projects-container .add-project {
 }
 
 .todo-container .item .check {
-  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-inline: 0rem 0.5rem;
 }
 
-.todo-container .item:not(.done):hover {
-  transform: scale(1.01);
+.todo-container .item .check input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
 }
 
 .todo-container .item .title {
@@ -196,7 +203,9 @@ nav ul .projects-container .add-project {
 }
 
 .todo-container .item .date {
-  margin-right: 0.5rem;
+  flex-shrink: 0;
+  margin-right: 0.25rem;
+  margin-left: 0.5rem;
 }
 
 .todo-container .item .btn-container {
@@ -218,16 +227,13 @@ nav ul .projects-container .add-project {
   height: 2rem;
 }
 
-.todo-container .item.add-todo:hover {
-  background-color: var(--color-sidebar-hover);
-}
-
 .modal {
   margin: auto;
   border: 2px solid var(--color-secondary);
   border-radius: 5px;
   box-shadow: 0 0 0 100vw rgb(0 0 0 / 0.5);
   min-width: 30ch;
+  z-index: 1;
 }
 
 .modal::backdrop {
@@ -278,6 +284,7 @@ nav ul .projects-container .add-project {
 
 .modal form input[name='title'] {
   font-weight: bold;
+  font-size: 1.4rem;
 }
 
 .modal form textarea {
@@ -371,15 +378,6 @@ nav ul .projects-container .add-project {
     grid-template-areas: 'header header' 'nav todo';
   }
 
-  nav {
-    right: 0%;
-    padding: 1rem;
-  }
-
-  nav.active {
-    right: 100%;
-  }
-
   header {
     padding-left: 3rem;
   }
@@ -388,14 +386,23 @@ nav ul .projects-container .add-project {
     display: none;
   }
 
+  nav {
+    right: 0%;
+    padding: 1rem;
+    z-index: 0;
+  }
+
+  nav.active {
+    right: 100%;
+  }
+
+  nav ul li:not(.projects):hover {
+    background-color: var(--color-sidebar-hover);
+  }
+
   .todo-container {
     grid-column: 2 / 3;
     padding: 2.5rem;
-  }
-
-  .todo-container .title h3 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
   }
 
   .todo-container .item .btn-container {
@@ -405,6 +412,14 @@ nav ul .projects-container .add-project {
 
   .todo-container .item:hover > .btn-container {
     display: block;
+  }
+
+  .todo-container .item.add-todo:hover {
+    background-color: var(--color-sidebar-hover);
+  }
+
+  .todo-container .item:not(.done):hover {
+    transform: scale(1.01);
   }
 
   .modal {

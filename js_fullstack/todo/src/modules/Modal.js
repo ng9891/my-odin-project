@@ -1,5 +1,7 @@
 import PubSub from '../helper/pubsub';
 import {removeChildren, createWrappingDiv, createInput, createButton} from '../helper/helper';
+import Project from './Project';
+import Todo from './Todo';
 
 const Modal = ($modal) => {
   const $closeBtn = $modal.querySelector('.close-btn img:last-of-type');
@@ -8,7 +10,7 @@ const Modal = ($modal) => {
   const $form = $modal.querySelector('form');
   const $title = $modal.querySelector('h3');
 
-  const createForm = (type) => {
+  const createForm = (type, {projectName, title, desc, priority = 1, due} = {}) => {
     removeChildren($form);
     if (type === 'project') {
       $deleteBtn.style.visibility = 'hidden';
@@ -26,20 +28,22 @@ const Modal = ($modal) => {
       $form.appendChild(projectDiv);
     } else {
       $deleteBtn.style.visibility = type === 'viewTask' ? 'visible' : 'hidden';
-      $title.textContent = type === 'viewTask' ? 'View Task' : 'Add New Task';
+      // $title.textContent = type === 'viewTask' ? 'View Task' : 'Add New Task';
+      $title.textContent = ``;
 
       const project = createInput({
         label: 'Project:',
         id: 'project',
-        type: 'text',
+        type: 'hidden',
         name: 'project',
+        value: projectName,
         readonly: '',
         required: '',
       });
       const projectDiv = createWrappingDiv('form-control');
-      for (const el of project) projectDiv.appendChild(el);
+      projectDiv.appendChild(project[1]);
 
-      const title = createInput({
+      const titleInput = createInput({
         id: 'title',
         type: 'text',
         name: 'title',
@@ -47,17 +51,17 @@ const Modal = ($modal) => {
         parentClass: 'form-control',
         required: '',
       });
-      const titleDiv = createWrappingDiv('form-control', [title[0]]);
+      const titleDiv = createWrappingDiv('form-control', [titleInput[0]]);
 
-      const desc = document.createElement('textarea');
-      desc.setAttribute('rows', 10);
-      desc.setAttribute('id', 'desc');
-      desc.setAttribute('name', 'desc');
-      desc.setAttribute('placeholder', 'Description');
-      desc.setAttribute('required', '');
-      const descDiv = createWrappingDiv('form-control', [desc]);
+      const descArea = document.createElement('textarea');
+      descArea.setAttribute('rows', 10);
+      descArea.setAttribute('id', 'desc');
+      descArea.setAttribute('name', 'desc');
+      descArea.setAttribute('placeholder', 'Description');
+      descArea.setAttribute('required', '');
+      const descDiv = createWrappingDiv('form-control', [descArea]);
 
-      const due = createInput({
+      const dueInput = createInput({
         label: 'Due:',
         id: 'due',
         type: 'date',
@@ -66,7 +70,7 @@ const Modal = ($modal) => {
         required: '',
       });
       const dueDiv = createWrappingDiv('form-control');
-      for (const el of due) dueDiv.appendChild(el);
+      for (const el of dueInput) dueDiv.appendChild(el);
 
       // Priority Radio buttons
       const optSpanLow = document.createElement('span');
@@ -88,15 +92,37 @@ const Modal = ($modal) => {
       const priorityDiv = createWrappingDiv('form-control', [optLow[0], optMed[0], optHigh[0]]);
       priorityDiv.classList.add('priority-container');
 
-      $form.appendChild(projectDiv);
+      if (type === 'viewTask') {
+        titleInput[0].setAttribute('value', title);
+        descArea.textContent = desc;
+        dueInput[1].setAttribute('value', due);
+        switch (priority) {
+          case 1: {
+            // optLow[0].firstChild.setAttribute('checked', '');
+            optLow[0].click();
+            break;
+          }
+          case 2: {
+            // optMed[0].firstChild.setAttribute('checked', '');
+            optMed[0].click();
+            break;
+          }
+          default:
+            // optHigh[0].firstChild.setAttribute('checked', '');
+            optHigh[0].click();
+        }
+      }
+
       $form.appendChild(titleDiv);
       $form.appendChild(descDiv);
+      $form.appendChild(projectDiv);
       $form.appendChild(dueDiv);
       $form.appendChild(priorityDiv);
     }
     // Modal Buttons
     const saveBtn = createButton('submit', 'Save');
     const closeBtn = createButton('button', 'Cancel');
+    closeBtn.addEventListener('click', closeModal, {once: true});
     const btnContainer = createWrappingDiv('form-control', [saveBtn, closeBtn]);
     $form.appendChild(btnContainer);
   };
@@ -118,40 +144,42 @@ const Modal = ($modal) => {
 
   const handleProjectSubmit = (e) => {
     const formData = Object.fromEntries(new FormData(e.target).entries());
-    PubSub.publish('newProject', formData);
+    PubSub.publish('newProject', Project(formData.project));
   };
 
   const handleTaskSubmit = (e) => {
-    const formData = Object.fromEntries(new FormData(e.target).entries());
-    PubSub.publish('newTaskSubmit', formData);
+    const {title, desc, priority, due} = Object.fromEntries(new FormData(e.target).entries());
+    const newTodo = Todo({title, desc, priority, due})
+    PubSub.publish('newTaskSubmit', newTodo);
   };
 
-  const addTaskModal = (projectName) => {
+  const addTaskModal = ({projectName}) => {
     if (!projectName) return console.error('No projectName');
-    createForm('addTask');
+    createForm('addTask', {projectName});
+    $modal.close();
     $modal.showModal();
     $form.addEventListener('submit', handleTaskSubmit, {once: true});
+    console.log('ADD OPENED FOR PROJECT:', projectName)
   };
 
   const addProjectModal = () => {
     createForm('project');
+    $modal.close();
     $modal.showModal();
     $form.addEventListener('submit', handleProjectSubmit, {once: true});
   };
 
-  const viewTaskModal = (projectName, {title, desc, priority, due}) => {
+  const viewTaskModal = ({projectName, title, desc, priority, due}) => {
     if (!projectName) return console.error('No projectName');
-    createForm('viewTask');
+    createForm('viewTask', {projectName, title, desc, priority, due});
+    $modal.close();
     $modal.showModal();
     $form.addEventListener('submit', handleTaskSubmit, {once: true});
   };
 
-  return {
-    addTaskModal,
-    addProjectModal,
-    viewTaskModal,
-    closeModal,
-  };
+  PubSub.subscribe('openAddProjectModal', addProjectModal);
+  PubSub.subscribe('openAddTaskModal', addTaskModal);
+  PubSub.subscribe('openViewTaskModal', viewTaskModal);
 };
 
 export default Modal;
