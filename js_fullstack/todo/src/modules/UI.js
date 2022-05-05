@@ -10,10 +10,13 @@ const handleTabClick = (e) => {
   if (li.classList.contains('active')) return;
 
   const currSelected = document.querySelector('nav ul li:not(.projects):not(.add-project).active');
-  currSelected.classList.remove('active');
+  if (currSelected) currSelected.classList.remove('active');
   li.classList.add('active');
+
+  // Closing sidebar
   const sidebar = li.closest('.sidebar');
   sidebar.classList.remove('active');
+
   const title = e.target.firstChild.textContent;
   const project = ProjectsUI.getProject(title);
   if (project) PubSub.publish('changeCurrProject', project);
@@ -70,7 +73,10 @@ const ProjectsUI = (() => {
 
   const deleteProject = (title) => {
     const deleted = projects.delete(title);
-    if (deleted) _render();
+    if (deleted) {
+      PubSub.publish('projectDeleted', title);
+      _render();
+    }
   };
 
   const getProjects = () => {
@@ -115,11 +121,13 @@ const ProjectsUI = (() => {
 
   PubSub.subscribe('newProject', addProject);
   PubSub.subscribe('changeCurrProject', setCurrProject);
-  PubSub.subscribe('projectDeleted', deleteProject);
+  PubSub.subscribe('deleteProject', deleteProject);
+
   PubSub.subscribe('todoAdded', () => _render());
   PubSub.subscribe('todoDeleted', () => _render());
   PubSub.subscribe('todoCompletedToggle', () => _render());
-  PubSub.subscribe('projectsUpdate', () => _render());
+  PubSub.subscribe('generalTabsUpdate', () => _render());
+  PubSub.subscribe('projectNameUpdated', () => _render());
 
   // _render();
   return {
@@ -134,6 +142,7 @@ const TodosUI = (() => {
   let currProject = null;
 
   const $todoContainer = document.querySelector('.todo-container');
+  const $homeEl = document.querySelector('li.home');
 
   const openModal = (e) => {
     if (e.target.type === 'checkbox' || e.target.classList.contains('deleteTodoBtn')) return;
@@ -162,12 +171,30 @@ const TodosUI = (() => {
     }
   };
 
+  const handleDeleteProject = () => {
+    PubSub.publish('deleteProject', currProject.getTitle());
+    $homeEl.click();
+  };
+
   const _render = () => {
     removeChildren($todoContainer);
     const projectTitle = currProject.getTitle();
-    const h3 = document.createElement('h3');
-    h3.textContent = projectTitle;
-    const title = createWrappingDiv('projTitle', [h3]);
+    const h2 = document.createElement('h2');
+    h2.textContent = projectTitle;
+
+    const span = createImgButton({
+      url: '../src/assets/trash-can-outline.svg',
+      className: 'deleteProjectBtn',
+      clickEvent: handleDeleteProject,
+      parentType: 'span',
+      parentClass: 'deleteProject',
+    });
+
+    const divChildren = [h2];
+    if (currProject.getTitle() !== 'Today' && currProject.getTitle() !== 'Week' && currProject.getTitle() !== 'Home') {
+      divChildren.push(span);
+    }
+    const title = createWrappingDiv('projTitle', divChildren);
     $todoContainer.appendChild(title);
 
     const todos = currProject.getTodoArr();
@@ -313,13 +340,13 @@ const GeneralTabsUI = (() => {
   $weekEl.addEventListener('click', handleTabClick);
 
   const _render = () => {
-    PubSub.publish('projectsUpdate');
+    PubSub.publish('generalTabsUpdate');
   };
 
   const calcProjects = function calcDailyWeeklyProjects() {
     const projectsMap = ProjectsUI.getProjects();
-    ProjectsUI.deleteProject('Today');
-    ProjectsUI.deleteProject('Week');
+    PubSub.publish('deleteProject', 'Today');
+    PubSub.publish('deleteProject', 'Week');
 
     const newDailyProj = Project('Today');
     const newWeeklyProj = Project('Week');
@@ -346,10 +373,16 @@ const GeneralTabsUI = (() => {
     _render();
   };
 
+  const handleProjectDeleted = (title) => {
+    if (title === 'Week' || title === 'Today') return;
+    calcProjects();
+  };
+
   PubSub.subscribe('newTaskSubmit', calcProjects);
   PubSub.subscribe('taskUpdate', calcProjects);
   PubSub.subscribe('todoCompletedToggle', calcProjects);
   PubSub.subscribe('todoDeleted', calcProjects);
+  PubSub.subscribe('projectDeleted', handleProjectDeleted);
   return {
     calcProjects,
   };

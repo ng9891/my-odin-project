@@ -9,12 +9,12 @@
 }
 
 :root {
-  --color-primary: white;
-  --color-secondary: #01497c;
-  --color-tertiary: #a9d6e5;
+  --color-primary: #f8f9fa;
+  --color-secondary: #212529;
+  --color-tertiary: #dee2e6;
 
-  --color-sidebar-indicator: #2a6f97;
-  --color-sidebar-hover: #89c2d9;
+  --color-sidebar-indicator: #212529;
+  --color-sidebar-hover: #adb5bd;
   --color-todo-low: green;
   --color-todo-med: orange;
   --color-todo-high: red;
@@ -152,9 +152,17 @@ nav ul .projects-container .add-project {
   padding: 1rem;
 }
 
-.todo-container .projTitle h3 {
-  font-size: 2rem;
+.todo-container .projTitle {
+  display: flex;
+  gap: 0.5rem;
   margin-bottom: 1.5rem;
+}
+
+.todo-container .projTitle .deleteProject {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: auto;
 }
 
 .todo-container .item {
@@ -441,6 +449,13 @@ nav ul .projects-container .add-project {
     margin-top: 1rem;
   }
 }
+
+@media only screen and (min-width: 1500px) {
+  .todo-container {
+    max-width: 120ch;
+  }
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;

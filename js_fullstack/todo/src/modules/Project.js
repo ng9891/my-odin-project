@@ -30,6 +30,7 @@ const Project = (title, completedCount = 0) => {
   };
 
   const getTitle = () => title;
+  const setTitle = (newTitle) => (title = newTitle);
   const getTodoArr = () => todoArr;
 
   const toggleCompleteTask = (todo) => {
@@ -49,6 +50,7 @@ const Project = (title, completedCount = 0) => {
     addTodo,
     deleteTodo,
     getTitle,
+    setTitle,
     getTodoArr,
     getSize,
     toggleCompleteTask,

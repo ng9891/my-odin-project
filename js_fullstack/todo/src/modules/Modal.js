@@ -162,7 +162,6 @@ const Modal = ($modal) => {
     $modal.close();
     $modal.showModal();
     $form.addEventListener('submit', handleTaskSubmit, {once: true});
-    console.log('ADD OPENED FOR PROJECT:', projectName);
   };
 
   const addProjectModal = () => {

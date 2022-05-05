@@ -50,7 +50,7 @@ export const createButton = (type, content, className) => {
 
 export const createImgButton = ({url, className, clickEvent, parentType = 'div', parentClass}) => {
   const container = document.createElement(parentType);
-  container.classList.add(parentClass);
+  if(parentClass) container.classList.add(parentClass);
 
   const img = document.createElement('img');
   img.setAttribute('src', url);
