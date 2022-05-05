@@ -60,7 +60,3 @@ export const createImgButton = ({url, className, clickEvent, parentType = 'div',
   container.addEventListener('click', clickEvent);
   return container;
 };
-
-export const formatDate = (date) => {
-  return date;
-};

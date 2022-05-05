@@ -3,7 +3,6 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     index: './src/index.js',
-    // module: './src/modules.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -24,10 +23,5 @@ module.exports = {
         type: 'asset/resource',
       },
     ],
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
   },
 };

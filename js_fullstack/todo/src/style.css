@@ -193,8 +193,15 @@ nav ul .projects-container .add-project {
 }
 
 .todo-container .item .check input[type='checkbox'] {
-  width: 1rem;
-  height: 1rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.todo-container .item .proj {
+  overflow-wrap: anywhere;
+  font-size: 0.9rem;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .todo-container .item .title {
@@ -393,7 +400,7 @@ nav ul .projects-container .add-project {
   }
 
   nav.active {
-    right: 100%;
+    right: 0%;
   }
 
   nav ul li:not(.projects):hover {

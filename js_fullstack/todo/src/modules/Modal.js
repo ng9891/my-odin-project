@@ -27,8 +27,6 @@ const Modal = ($modal) => {
       for (const el of project) projectDiv.appendChild(el);
       $form.appendChild(projectDiv);
     } else {
-      $deleteBtn.style.visibility = type === 'viewTask' ? 'visible' : 'hidden';
-      // $title.textContent = type === 'viewTask' ? 'View Task' : 'Add New Task';
       $title.textContent = ``;
 
       const project = createInput({
@@ -49,6 +47,7 @@ const Modal = ($modal) => {
         name: 'title',
         placeholder: 'Name',
         parentClass: 'form-control',
+        maxlength: 80,
         required: '',
       });
       const titleDiv = createWrappingDiv('form-control', [titleInput[0]]);
@@ -58,7 +57,6 @@ const Modal = ($modal) => {
       descArea.setAttribute('id', 'desc');
       descArea.setAttribute('name', 'desc');
       descArea.setAttribute('placeholder', 'Description');
-      descArea.setAttribute('required', '');
       const descDiv = createWrappingDiv('form-control', [descArea]);
 
       const dueInput = createInput({
@@ -67,7 +65,6 @@ const Modal = ($modal) => {
         type: 'date',
         name: 'due',
         parentClass: 'form-control',
-        required: '',
       });
       const dueDiv = createWrappingDiv('form-control');
       for (const el of dueInput) dueDiv.appendChild(el);
@@ -149,8 +146,14 @@ const Modal = ($modal) => {
 
   const handleTaskSubmit = (e) => {
     const {title, desc, priority, due} = Object.fromEntries(new FormData(e.target).entries());
-    const newTodo = Todo({title, desc, priority, due})
+    const newTodo = Todo({title, desc, priority, due});
     PubSub.publish('newTaskSubmit', newTodo);
+  };
+
+  const handleTaskUpdate = (oldTodo, e) => {
+    const {title, desc, priority, due, project} = Object.fromEntries(new FormData(e.target).entries());
+    const newTodo = {title, desc, priority, due, projectName: project};
+    PubSub.publish('taskUpdate', {newTodo, oldTodo});
   };
 
   const addTaskModal = ({projectName}) => {
@@ -159,7 +162,7 @@ const Modal = ($modal) => {
     $modal.close();
     $modal.showModal();
     $form.addEventListener('submit', handleTaskSubmit, {once: true});
-    console.log('ADD OPENED FOR PROJECT:', projectName)
+    console.log('ADD OPENED FOR PROJECT:', projectName);
   };
 
   const addProjectModal = () => {
@@ -169,17 +172,19 @@ const Modal = ($modal) => {
     $form.addEventListener('submit', handleProjectSubmit, {once: true});
   };
 
-  const viewTaskModal = ({projectName, title, desc, priority, due}) => {
+  const viewTaskModal = (formType, {projectName, title, desc, priority, due}) => {
     if (!projectName) return console.error('No projectName');
-    createForm('viewTask', {projectName, title, desc, priority, due});
+    createForm(formType, {projectName, title, desc, priority, due});
     $modal.close();
     $modal.showModal();
-    $form.addEventListener('submit', handleTaskSubmit, {once: true});
+    $form.addEventListener('submit', handleTaskUpdate.bind(null, {title, desc, priority, due, projectName}), {
+      once: true,
+    });
   };
 
   PubSub.subscribe('openAddProjectModal', addProjectModal);
   PubSub.subscribe('openAddTaskModal', addTaskModal);
-  PubSub.subscribe('openViewTaskModal', viewTaskModal);
+  PubSub.subscribe('openViewTaskModal', viewTaskModal.bind(null, 'viewTask'));
 };
 
 export default Modal;

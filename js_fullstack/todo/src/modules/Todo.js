@@ -1,19 +1,25 @@
 const Todo = ({title, desc, due, priority = 1}) => {
   let completed = false;
+  priority = Number(priority);
+  let project = null;
+  const getTitle = () => title;
   const setTitle = (newTitle) => (title = newTitle);
   const setDesc = (newDesc) => (desc = newDesc);
   const setDue = (newDue) => (due = newDue);
-  const setPriority = (newPriority) => (priority = newPriority);
+  const setPriority = (newPriority) => (priority = Number(newPriority));
+  const setToProject = (projectName) => (project = projectName);
+  const getProjectName = () => project;
   const getCompleted = () => completed;
   const toggleCompleted = () => {
     completed = !completed;
     return completed;
   };
   const getTodo = () => {
-    return {title, desc, due, priority, completed};
+    return {title, desc, due, priority, completed, project};
   };
 
   return {
+    getTitle,
     setTitle,
     setDesc,
     setDue,
@@ -21,6 +27,8 @@ const Todo = ({title, desc, due, priority = 1}) => {
     getTodo,
     getCompleted,
     toggleCompleted,
+    setToProject,
+    getProjectName,
   };
 };
 

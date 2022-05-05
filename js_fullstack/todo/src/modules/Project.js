@@ -1,14 +1,21 @@
 const Project = (title, completedCount = 0) => {
   let todoArr = [];
 
-  const addTodo = (todo) => {
-    const found = todoArr.find((el) => el === todo);
+  const addTodo = (todo, set = true) => {
+    // Enforce unique title and projectName.
+    const found = todoArr.find((el) => {
+      if (!todo.getProjectName() && el.getTitle() === todo.getTitle()) return el;
+      if (todo.getProjectName() && (el.getTitle() === todo.getTitle() && el.getProjectName() === todo.getProjectName()))
+        return el;
+    });
+    if (todo.getCompleted()) completedCount += 1;
     if (found) return alert('Repeated task name');
+    if (set) todo.setToProject(title);
     todoArr.push(todo);
   };
 
   const getTodo = (title) => {
-    return todoArr.find((el) => el.getTodo().title === title);
+    return todoArr.find((el) => el.getTitle() === title);
   };
 
   const deleteTodo = (todo) => {
@@ -24,13 +31,15 @@ const Project = (title, completedCount = 0) => {
 
   const getTitle = () => title;
   const getTodoArr = () => todoArr;
-  
+
   const toggleCompleteTask = (todo) => {
+    const found = todoArr.find((el) => el === todo);
+    if (!found) return null;
     const completed = todo.toggleCompleted();
     completedCount = completed ? completedCount + 1 : completedCount - 1;
     return completed;
   };
-  
+
   const getSize = () => todoArr.length;
   const getCompletedCount = () => {
     return completedCount;
