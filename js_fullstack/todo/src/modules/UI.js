@@ -5,7 +5,14 @@ import Modal from './Modal';
 import ProjectsUI from './ProjectsUI';
 import Storage from './Storage';
 
-import {removeChildren, createImgButton, createWrappingDiv, createInput, tabClickLogic} from '../helper/helper';
+import {
+  removeChildren,
+  createImgButton,
+  createWrappingDiv,
+  createInput,
+  tabClickLogic,
+  getRandomInt,
+} from '../helper/helper';
 import {add as addDate, compareAsc, format} from 'date-fns';
 
 const TodosUI = (() => {
@@ -102,7 +109,7 @@ const TodosUI = (() => {
     if (todo) {
       const deleted = project.deleteTodo(todo);
       if (deleted) {
-        currProject.deleteTodo(todo);
+        if (currProject !== project) currProject.deleteTodo(todo);
         PubSub.publish('todoDeleted', todo);
         _render();
       }
@@ -267,10 +274,27 @@ const GeneralTabsUI = (() => {
   };
 })();
 
-// Demo
+// Demo. Add a random project and X amount of Task(s).
 const demo = () => {
-  console.log('hi');
-  const projects = ProjectsUI.getProjects();
+  const projName = `Project${getRandomInt(999) + getRandomInt(999)}`;
+  const newProject = Project(projName);
+
+  const today = new Date().setHours(0, 0, 0, 0);
+  for (let j = 0; j < getRandomInt(10) + 1; j++) {
+    const title = `Todo${getRandomInt(999) + getRandomInt(999)}`;
+    const desc = `Random Description ${getRandomInt(999)}`;
+    const date = addDate(today, {days: getRandomInt(10)});
+    const due = format(date, 'yyyy-MM-dd');
+    const priority = getRandomInt(3) + 1;
+    const completed = getRandomInt() === 1 ? true : false;
+    const project = projName;
+
+    const newTodo = Todo({title, desc, due, priority, completed, project});
+    newProject.addTodo(newTodo);
+  }
+
+  PubSub.publish('newProject', newProject);
+  GeneralTabsUI.calcProjects();
 };
 
 const restoreProjects = () => {
@@ -300,6 +324,15 @@ const main = () => {
 
   const demoBtn = document.querySelector('.demo button');
   demoBtn.addEventListener('click', demo);
+
+  // Sidebar
+  const toggleSidebar = () => {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('active');
+  };
+
+  const sidebarBtn = document.querySelector('.sidebar-btn');
+  sidebarBtn.addEventListener('click', toggleSidebar);
 };
 
 export default main;

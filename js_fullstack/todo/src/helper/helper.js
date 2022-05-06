@@ -50,7 +50,7 @@ export const createButton = (type, content, className) => {
 
 export const createImgButton = ({url, className, clickEvent, parentType = 'div', parentClass}) => {
   const container = document.createElement(parentType);
-  if(parentClass) container.classList.add(parentClass);
+  if (parentClass) container.classList.add(parentClass);
 
   const img = document.createElement('img');
   img.setAttribute('src', url);
@@ -72,4 +72,8 @@ export const tabClickLogic = (e) => {
   // Closing sidebar
   const sidebar = li.closest('.sidebar');
   sidebar.classList.remove('active');
+};
+
+export const getRandomInt = (max = 2) => {
+  return Math.floor(Math.random() * max);
 };

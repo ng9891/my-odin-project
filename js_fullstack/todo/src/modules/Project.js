@@ -21,9 +21,9 @@ const Project = (title, completedCount = 0) => {
 
   const deleteTodo = (todo) => {
     const len = todoArr.length;
+    if (len === 0) return false;
     const filteredArr = todoArr.filter((el) => el !== todo);
-
-    if (len !== 0 && filteredArr.length === len) return false;
+    if (filteredArr.length === len) return false;
 
     if (todo.getCompleted()) completedCount -= 1;
     todoArr = filteredArr;
@@ -61,18 +61,3 @@ const Project = (title, completedCount = 0) => {
 };
 
 export default Project;
-
-// const test = Project('testProject');
-
-// test.addTodo({title:'test'})
-// test.addTodo({title:'test2'})
-// test.addTodo({title:'test3'})
-// const arr = test.getTodoArr();
-
-// console.log(test.getTodoArr())
-// console.log(test.getSize())
-// console.log(test.getTitle())
-
-// arr[1].title = 'this is changed';
-
-// console.log(test.getTodoArr())

@@ -1,5 +1,6 @@
 import PubSub from '../helper/pubsub';
 import {removeChildren, tabClickLogic, createImgButton} from '../helper/helper';
+
 const ProjectsUI = (() => {
   const projects = new Map();
   let currProject = null;

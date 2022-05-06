@@ -68,6 +68,13 @@ header .demo {
   margin-left: auto;
   display: flex;
   align-items: center;
+  margin-right: 1rem;
+}
+
+header .demo button {
+  padding: 0.3rem 0.5rem;
+  background-color: var(--color-tertiary);
+  border-radius: 5px;
 }
 
 nav {
@@ -78,7 +85,7 @@ nav {
   transition: right 0.5s ease;
   padding: 1rem 0.7rem;
   font-size: var(--font-fz-nav);
-  overflow: auto;
+  overflow-y: auto;
 }
 
 nav.active {
@@ -148,6 +155,7 @@ nav li ul.projects-container li {
 
 nav ul .projects-container .add-project {
   justify-content: center;
+  margin-top: 1rem;
   margin-left: 0rem;
 }
 
@@ -156,6 +164,7 @@ nav ul .projects-container .add-project {
   background-color: var(--color-primary);
   grid-column: 1 / 3;
   padding: 1rem;
+  overflow-y: auto;
 }
 
 .todo-container .projTitle {
