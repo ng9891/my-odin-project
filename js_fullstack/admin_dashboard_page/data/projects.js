@@ -55,7 +55,15 @@ const PROJECTS = {
       github: 'https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/tic_tac_toe',
       link: 'https://ng9891.github.io/my-odin-project/js_fullstack/tic_tac_toe/',
       img: 'https://storage.googleapis.com/picboi-39298.appspot.com/final/LflhHum1_1000x800',
-      desc: 'Tic Tac Toe game built using JS factory/module functions and the Minimax algorithm with alpha-beta prunning.',
+      desc:
+        'Tic Tac Toe game built using JS factory/module functions and the Minimax algorithm with alpha-beta prunning.',
+    },
+    {
+      name: 'TODO List App',
+      github: 'https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/todo',
+      link: 'https://ng9891.github.io/my-odin-project/js_fullstack/todo/dist/',
+      img: 'https://storage.googleapis.com/picboi-39298.appspot.com/final/4CKB68yK_1000x800',
+      desc: 'Dynamically created TODO list application using Webpack and modular patterns.',
     },
   ],
 };
