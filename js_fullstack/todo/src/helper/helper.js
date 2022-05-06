@@ -60,3 +60,16 @@ export const createImgButton = ({url, className, clickEvent, parentType = 'div',
   container.addEventListener('click', clickEvent);
   return container;
 };
+
+export const tabClickLogic = (e) => {
+  const li = e.target.closest('li');
+  if (li.classList.contains('active')) return;
+
+  const currSelected = document.querySelector('nav ul li:not(.projects):not(.add-project).active');
+  if (currSelected) currSelected.classList.remove('active');
+  li.classList.add('active');
+
+  // Closing sidebar
+  const sidebar = li.closest('.sidebar');
+  sidebar.classList.remove('active');
+};

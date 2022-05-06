@@ -4,7 +4,7 @@ import './style.css';
 
 main();
 
-// Testing sidebar
+// Sidebar
 const toggleSidebar = () => {
   const sidebar = document.querySelector('.sidebar');
   sidebar.classList.toggle('active');

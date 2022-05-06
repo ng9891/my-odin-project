@@ -64,6 +64,12 @@ header .sidebar-btn img {
   filter: invert(1);
 }
 
+header .demo {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
 nav {
   grid-area: nav;
   background-color: var(--color-tertiary);

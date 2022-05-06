@@ -2,141 +2,11 @@ import PubSub from '../helper/pubsub';
 import Project from './Project';
 import Todo from './Todo';
 import Modal from './Modal';
-import {removeChildren, createImgButton, createWrappingDiv, createInput} from '../helper/helper';
+import ProjectsUI from './ProjectsUI';
+import Storage from './Storage';
+
+import {removeChildren, createImgButton, createWrappingDiv, createInput, tabClickLogic} from '../helper/helper';
 import {add as addDate, compareAsc, format} from 'date-fns';
-
-const handleTabClick = (e) => {
-  const li = e.target.closest('li');
-  if (li.classList.contains('active')) return;
-
-  const currSelected = document.querySelector('nav ul li:not(.projects):not(.add-project).active');
-  if (currSelected) currSelected.classList.remove('active');
-  li.classList.add('active');
-
-  // Closing sidebar
-  const sidebar = li.closest('.sidebar');
-  sidebar.classList.remove('active');
-
-  const title = e.target.firstChild.textContent;
-  const project = ProjectsUI.getProject(title);
-  if (project) PubSub.publish('changeCurrProject', project);
-};
-
-const ProjectsUI = (() => {
-  const projects = new Map();
-  let currProject = null;
-
-  const $projectsContainer = document.querySelector('ul .projects-container');
-  const $homeEl = document.querySelector('li.home');
-  const $todayEl = document.querySelector('li.today');
-  const $weekEl = document.querySelector('li.week');
-
-  const updateTodoCount = (project, el) => {
-    const count = project.getSize() - project.getCompletedCount();
-    if (count === 0) el.classList.add('notodo');
-    else {
-      el.textContent = count;
-      el.classList.remove('notodo');
-    }
-  };
-
-  const createProjectElement = (title) => {
-    const li = document.createElement('li');
-
-    const spanTitle = document.createElement('span');
-    const spanTodo = document.createElement('span');
-
-    spanTitle.textContent = title;
-
-    const project = projects.get(title);
-    if (project) updateTodoCount(project, spanTodo);
-
-    li.appendChild(spanTitle);
-    li.appendChild(spanTodo);
-    li.addEventListener('click', handleTabClick);
-
-    if (currProject) {
-      const currTitle = currProject.getTitle();
-      if (currTitle === title) li.classList.add('active');
-    }
-
-    return li;
-  };
-
-  const addProject = (project) => {
-    const title = project.getTitle();
-    if (projects.has(title)) return alert('Repeated Project Name');
-    projects.set(title, project);
-    _render();
-    return true;
-  };
-
-  const deleteProject = (title) => {
-    const deleted = projects.delete(title);
-    if (deleted) {
-      PubSub.publish('projectDeleted', title);
-      _render();
-    }
-  };
-
-  const getProjects = () => {
-    return projects;
-  };
-
-  const getProject = (title) => {
-    return projects.get(title);
-  };
-
-  const handleAddProject = () => {
-    PubSub.publish('openAddProjectModal');
-  };
-
-  const _render = () => {
-    removeChildren($projectsContainer);
-    projects.forEach((project, title) => {
-      if (title === 'Home' || title === 'Today' || title === 'Week') {
-        let el = null;
-        if (title === 'Home') el = $homeEl;
-        else if (title === 'Today') el = $todayEl;
-        else el = $weekEl;
-        updateTodoCount(project, el.lastElementChild);
-      } else {
-        const li = createProjectElement(title);
-        $projectsContainer.append(li);
-      }
-    });
-
-    const btn = createImgButton({
-      url: '../src/assets/plus.svg',
-      clickEvent: handleAddProject,
-      parentType: 'li',
-      parentClass: 'add-project',
-    });
-    $projectsContainer.append(btn);
-  };
-
-  const setCurrProject = (project) => {
-    currProject = project;
-  };
-
-  PubSub.subscribe('newProject', addProject);
-  PubSub.subscribe('changeCurrProject', setCurrProject);
-  PubSub.subscribe('deleteProject', deleteProject);
-
-  PubSub.subscribe('todoAdded', () => _render());
-  PubSub.subscribe('todoDeleted', () => _render());
-  PubSub.subscribe('todoCompletedToggle', () => _render());
-  PubSub.subscribe('generalTabsUpdate', () => _render());
-  PubSub.subscribe('projectNameUpdated', () => _render());
-
-  // _render();
-  return {
-    addProject,
-    deleteProject,
-    getProject,
-    getProjects,
-  };
-})();
 
 const TodosUI = (() => {
   let currProject = null;
@@ -304,9 +174,13 @@ const TodosUI = (() => {
   };
 
   const handleNewTask = (todo) => {
-    currProject.addTodo(todo);
-    PubSub.publish('todoAdded', todo);
-    _render();
+    const done = currProject.addTodo(todo);
+    if (done) {
+      PubSub.publish('todoAdded', todo);
+      _render();
+    } else {
+      alert('Repeated Task Name');
+    }
   };
 
   const handleTaskUpdate = ({newTodo, oldTodo}) => {
@@ -330,18 +204,22 @@ const TodosUI = (() => {
   PubSub.subscribe('taskUpdate', handleTaskUpdate);
 })();
 
+// Populating daily and weekly projects.
 const GeneralTabsUI = (() => {
   const $homeEl = document.querySelector('li.home');
   const $todayEl = document.querySelector('li.today');
   const $weekEl = document.querySelector('li.week');
 
+  const handleTabClick = (e) => {
+    tabClickLogic(e);
+    const title = e.target.firstChild.textContent;
+    const project = ProjectsUI.getProject(title);
+    if (project) PubSub.publish('changeCurrProject', project);
+  };
+
   $homeEl.addEventListener('click', handleTabClick);
   $todayEl.addEventListener('click', handleTabClick);
   $weekEl.addEventListener('click', handleTabClick);
-
-  const _render = () => {
-    PubSub.publish('generalTabsUpdate');
-  };
 
   const calcProjects = function calcDailyWeeklyProjects() {
     const projectsMap = ProjectsUI.getProjects();
@@ -368,9 +246,9 @@ const GeneralTabsUI = (() => {
         }
       });
     }
-    ProjectsUI.addProject(newDailyProj);
-    ProjectsUI.addProject(newWeeklyProj);
-    _render();
+
+    PubSub.publish('newProject', newDailyProj);
+    PubSub.publish('newProject', newWeeklyProj);
   };
 
   const handleProjectDeleted = (title) => {
@@ -383,49 +261,45 @@ const GeneralTabsUI = (() => {
   PubSub.subscribe('todoCompletedToggle', calcProjects);
   PubSub.subscribe('todoDeleted', calcProjects);
   PubSub.subscribe('projectDeleted', handleProjectDeleted);
+
   return {
     calcProjects,
   };
 })();
 
+// Demo
+const demo = () => {
+  console.log('hi');
+  const projects = ProjectsUI.getProjects();
+};
+
+const restoreProjects = () => {
+  const projects = Storage.restoreStorage();
+  if (!projects) return false;
+  for (const [key, project] of Object.entries(projects)) {
+    const newProj = Project(key);
+    ProjectsUI.addProject(newProj);
+    for (const todo of project) {
+      const newTodo = Todo(todo);
+      newProj.addTodo(newTodo);
+    }
+  }
+  return true;
+};
+
 const main = () => {
   Modal(document.querySelector('.modal'));
-  const home = Project('Home');
-  const today = Project('Today');
-  const week = Project('Week');
+  const restored = restoreProjects();
 
-  ProjectsUI.addProject(home);
-  ProjectsUI.addProject(today);
-  ProjectsUI.addProject(week);
+  const home = restored ? ProjectsUI.getProject('Home') : Project('Home');
+  if (!restored) PubSub.publish('newProject', home);
 
-  // Testing
-  const testProj = Project('testingProj');
-  const test = Todo({title: 'testTodo', desc: 'testDesc', priority: 1, due: '2022-05-05'});
-  testProj.addTodo(test);
-  // home.addTodo(test);
-
-  const test2 = Todo({title: 'testTodo2', desc: 'testDesc', priority: 3, due: '2022-05-09'});
-  testProj.addTodo(test2);
-  // home.addTodo(test2);
-
-  const test3 = Todo({title: 'testTodo3', desc: 'testDesc', priority: 2, due: '2022-05-13'});
-  testProj.addTodo(test3);
-  // home.addTodo(test3);
-
-  const test4 = Todo({title: 'testTodo444 4444 44444', desc: 'testDesc', priority: 2});
-  testProj.addTodo(test4);
-  // home.addTodo(test4);
-
-  const test5 = Todo({title: 'testTodo444 4444 444444', desc: 'testDesc', priority: 2, due: '2022-05-06'});
-  testProj.addTodo(test5);
-  // home.addTodo(test5);
-
-  ProjectsUI.addProject(testProj);
-
-  // Init with Home
   PubSub.publish('changeCurrProject', home);
-
   GeneralTabsUI.calcProjects();
+  PubSub.publish('finishInitalLoad', ProjectsUI.getProjects());
+
+  const demoBtn = document.querySelector('.demo button');
+  demoBtn.addEventListener('click', demo);
 };
 
 export default main;

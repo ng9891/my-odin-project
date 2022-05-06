@@ -8,10 +8,11 @@ const Project = (title, completedCount = 0) => {
       if (todo.getProjectName() && (el.getTitle() === todo.getTitle() && el.getProjectName() === todo.getProjectName()))
         return el;
     });
+    if (found) return false;
     if (todo.getCompleted()) completedCount += 1;
-    if (found) return alert('Repeated task name');
     if (set) todo.setToProject(title);
     todoArr.push(todo);
+    return true;
   };
 
   const getTodo = (title) => {
