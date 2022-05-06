@@ -186,7 +186,7 @@ const TodosUI = (() => {
       PubSub.publish('todoAdded', todo);
       _render();
     } else {
-      alert('Repeated Task Name');
+      alert('Repeated Task Name on Add');
     }
   };
 
@@ -196,7 +196,10 @@ const TodosUI = (() => {
 
     const {title, desc, due, priority} = newTodo;
     const found = project.getTodo(newTodo.title);
-    if (found && found !== todo) return alert('Repeated task name');
+    if (found && found !== todo) {
+      alert('Repeated task name');
+      return;
+    }
     todo.setTitle(title);
     todo.setDesc(desc);
     todo.setDue(due);
@@ -263,7 +266,7 @@ const GeneralTabsUI = (() => {
     calcProjects();
   };
 
-  PubSub.subscribe('newTaskSubmit', calcProjects);
+  PubSub.subscribe('todoAdded', calcProjects);
   PubSub.subscribe('taskUpdate', calcProjects);
   PubSub.subscribe('todoCompletedToggle', calcProjects);
   PubSub.subscribe('todoDeleted', calcProjects);

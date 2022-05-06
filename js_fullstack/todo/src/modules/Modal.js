@@ -7,11 +7,15 @@ const Modal = ($modal) => {
   const $closeBtn = $modal.querySelector('.close-btn img:last-of-type');
   const $deleteBtn = $modal.querySelector('.close-btn img:first-of-type');
 
-  const $form = $modal.querySelector('form');
+  let $form = $modal.querySelector('form');
   const $title = $modal.querySelector('h3');
 
   const createForm = (type, {projectName, title, desc, priority = 1, due} = {}) => {
     removeChildren($form);
+    // Remove previous eventListeners
+    const newForm = $form.cloneNode(true);
+    $form.parentNode.replaceChild(newForm, $form);
+    $form = newForm;
     if (type === 'project') {
       $deleteBtn.style.visibility = 'hidden';
       $title.textContent = 'New Project';
