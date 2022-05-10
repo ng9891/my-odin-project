@@ -14,8 +14,8 @@
   --color-main: white;
   --color-secondary: #3d5a80;
   --color-tertiary: #293241;
-  --color-accent-main: #ee6c4d;
-  --color-accent-main-hover: gray;
+  --color-accent-main: rgba(238, 109, 77, 0.8);
+  --color-accent-main-hover: #ee6c4d;
 
   --color-rain: blue;
 
@@ -78,6 +78,10 @@ header .btn-container {
   font-size: 1rem;
 }
 
+header .btn-container > span {
+  cursor: pointer;
+}
+
 header .btn-container > span.active {
   font-weight: bold;
   font-size: 1.05rem;
@@ -89,6 +93,8 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  --general-padding-inline: 1rem;
 }
 
 main .forecast {
@@ -97,7 +103,7 @@ main .forecast {
   grid-template-areas: 'location location' 'detail weather' 'hourly hourly';
   text-transform: uppercase;
   width: 100%;
-  padding-inline: 1rem;
+  padding-inline: var(--general-padding-inline);
   gap: 1rem;
 }
 
@@ -178,6 +184,7 @@ main .hourly {
   border-top: 1px solid rgba(0, 0, 0, 0.25);
   --card-gap: 1rem;
   --card-shown: 3;
+  --padding-card: 1rem;
 }
 
 main .hourly > .card {
@@ -185,8 +192,8 @@ main .hourly > .card {
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  padding: 1rem 0;
-  flex: 1 0 calc((100% - var(--card-gap) * var(--card-shown) + 1rem) / var(--card-shown));
+  padding: var(--padding-card) 0;
+  flex: 1 0 calc((100% - var(--card-gap) * var(--card-shown) + var(--padding-card)) / var(--card-shown));
   height: 100%;
 }
 
@@ -194,14 +201,12 @@ main .hourly > .card i:not(.wi-raindrop) {
   font-size: 1.4rem;
 }
 
-main .hourly > .card .rain {
-  margin-bottom: auto;
-}
-
 main .hourly > .card .condition {
   font-size: 0.8rem;
   overflow-wrap: anywhere;
   text-align: center;
+  flex-shrink: 1;
+  flex-basis: 25%;
 }
 
 main .hourly > .card .rain {
@@ -213,16 +218,137 @@ main .hourly > .card .rain {
 }
 
 main .details {
+  --padding: 1.5rem;
+  --gap: 1rem;
+  --details-per-row: 2;
+
   width: 100%;
   background-color: var(--color-tertiary);
-  display: flex;
   color: var(--font-color-secondary);
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: var(--padding);
+  gap: var(--gap);
+}
+
+main .details > .info {
+  flex-grow: 1;
+  flex-basis: calc(100% / var(--details-per-row) - var(--padding));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-wrap: break-word;
+}
+
+main .details > .info span:first-of-type {
+  opacity: 0.5;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+main .daily {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+main .daily > div {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+main .daily > div span:first-of-type {
+  flex-grow: 1;
+}
+
+main .daily > div i {
+  font-size: 1.2rem;
 }
 
 footer {
-  border: 1px solid black;
+  border-top: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
   padding: 0.5rem;
+  background-color: var(--color-tertiary);
+  color: var(--font-color-secondary);
+}
+
+footer > span {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+@media only screen and (min-width: 760px) {
+  main {
+    --general-padding-inline: 20%;
+  }
+
+  main .hourly {
+    --card-shown: 5;
+  }
+
+  main .details {
+    --details-per-row: 3;
+  }
+
+  main .daily {
+    padding-inline: var(--general-padding-inline);
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  header {
+    flex-direction: row;
+    justify-content: center;
+    padding-inline: 30%;
+  }
+
+  header .search {
+    flex: 1;
+  }
+
+  main {
+    --general-padding-inline: 30%;
+  }
+
+  main .forecast {
+    padding: 2rem var(--general-padding-inline);
+  }
+
+  main .hourly {
+    --card-shown: 5;
+  }
+
+  main .details {
+    --details-per-row: 4;
+    padding: 2.5rem calc(var(--general-padding-inline) - 10%);
+  }
+
+  main .daily {
+    padding-inline: var(--general-padding-inline);
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  main {
+    --general-padding-inline: 37%;
+  }
+
+  main .details {
+    padding-inline: calc(var(--general-padding-inline) - 5%);
+  }
+
+  main .daily {
+    padding-inline: var(--general-padding-inline);
+  }
 }

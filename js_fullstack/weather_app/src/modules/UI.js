@@ -1,6 +1,7 @@
 import Weather from './weather';
 import WeatherController from './weatherController';
 import ForecastUI from './ForecastUI';
+import DailyUI from './DailyUI';
 
 const main = () => {
   const degree = '°';
@@ -15,6 +16,7 @@ const main = () => {
   const weather = Weather('New York City', 'United States', data);
 
   const forecast = ForecastUI(weather);
+  const daily = DailyUI(weather);
 
   console.log(data);
 };

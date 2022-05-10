@@ -2,11 +2,11 @@ import {format, fromUnixTime} from 'date-fns';
 import {removeChildren, createContainer, addChildren, degree} from '../helpers/helper';
 
 const ForecastUI = (Weather) => {
-  const $forecast = document.querySelector('.forecast');
-  const $location = document.querySelector('.location');
-  const $smallDetail = document.querySelector('.small-details');
-  const $currWeather = document.querySelector('.weather');
-  const $hourly = document.querySelector('.hourly');
+  const $location = document.querySelector('.forecast .location');
+  const $smallDetail = document.querySelector('.forecast .small-details');
+  const $currWeather = document.querySelector('.forecast .weather');
+  const $hourly = document.querySelector('.forecast .hourly');
+  const $details = document.querySelector('main .details');
 
   const _createLocation = (city, date) => {
     removeChildren($location);
@@ -52,20 +52,20 @@ const ForecastUI = (Weather) => {
     removeChildren($hourly);
     const createCard = ({date, iconID, condition, temp, precipitationChance}) => {
       const timeSpan = createContainer('span');
-      const icon = createContainer('span', `wi wi-owm-${iconID}`);
+      const icon = createContainer('i', `wi wi-owm-${iconID}`);
       const conditionSpan = createContainer('span', 'condition');
       const tempSpan = createContainer('span', 'temp');
       const rainSpan = createContainer('span', 'rain');
 
       timeSpan.textContent = format(date, 'h:mmaaa');
       conditionSpan.textContent = condition;
-      tempSpan.textContent = `${temp}${degree}`;
+      tempSpan.textContent = `${Math.floor(temp)}${degree}`;
 
       if (precipitationChance) {
         const chance = Math.floor(precipitationChance * 100);
         const raindropIcon = createContainer('i', 'wi wi-raindrop');
-        rainSpan.appendChild(raindropIcon);
         rainSpan.textContent = `${chance}%`;
+        rainSpan.prepend(raindropIcon);
       }
       return createContainer('div', 'card', [timeSpan, icon, conditionSpan, tempSpan, rainSpan]);
     };
@@ -82,6 +82,44 @@ const ForecastUI = (Weather) => {
     addChildren($hourly, cardArr);
   };
 
+  const _createDetails = (data, pop) => {
+    removeChildren($details);
+    const addCard = (key, value) => {
+      const titleSpan = createContainer('span');
+      const infoSpan = createContainer('span');
+      titleSpan.textContent = key;
+      infoSpan.textContent = value;
+      const container = createContainer('div', 'info', [titleSpan, infoSpan]);
+      $details.appendChild(container);
+    };
+
+    const {sunrise, sunset, humidity, pressure, visibility, wind_speed, wind_deg, rain, snow, uvi} = data;
+    let precipitation = '0mm';
+    let chance = '0%';
+    if (rain) {
+      precipitation = `${rain['1h']}mm`;
+      chance = ` ${pop * 100}%`;
+    } else if (snow) {
+      precipitation = `${snow['1h']}mm`;
+      chance = `${pop * 100}%`;
+    }
+    const detailObj = {
+      sunrise: format(fromUnixTime(sunrise), 'h:mmaaa'),
+      sunset: format(fromUnixTime(sunset), 'h:mmaaa'),
+      ['Precipitation chance']: chance,
+      ['Precipitation']: precipitation,
+      humidity: `${humidity}%`,
+      visibility: `${Math.floor(visibility / 1000)} km`,
+      pressure: `${pressure} hPa`,
+      ['wind']: `${wind_speed}m/s ${wind_deg}${degree}`,
+      ['UV Index']: uvi,
+    };
+
+    for (const [key, val] of Object.entries(detailObj)) {
+      addCard(key, val);
+    }
+  };
+
   const _render = () => {
     const currWeather = Weather.data.current;
     const date = fromUnixTime(currWeather.dt);
@@ -90,11 +128,13 @@ const ForecastUI = (Weather) => {
     const todayMaxTemp = daily[0].temp.max;
     const iconID = currWeather.weather[0].id;
     const condition = currWeather.weather[0].description;
+    const chanceOfPrecipitation = Weather.data.hourly[0].pop;
 
     _createLocation(Weather.name, date);
     _createSmallDetail(date, currWeather.temp, todayMinTemp, todayMaxTemp, currWeather.feels_like);
     _createCurrWeather(iconID, condition);
     _createHourlyForecast(Weather.data.hourly);
+    _createDetails(currWeather, chanceOfPrecipitation);
   };
 
   const setData = (newWeather) => {

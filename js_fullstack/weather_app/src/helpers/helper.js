@@ -17,7 +17,7 @@ export const addChildren = (container, childElArr) => {
 
 export const createContainer = (type = 'div', className, childElArr) => {
   const div = document.createElement(type);
-  if(className) div.className = className;
+  if (className) div.className = className;
   addChildren(div, childElArr);
   return div;
 };
