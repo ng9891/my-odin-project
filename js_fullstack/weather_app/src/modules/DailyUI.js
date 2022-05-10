@@ -1,5 +1,6 @@
-import {removeChildren, createContainer, celsiusToFahrenheit, degree} from '../helpers/helper';
 import {fromUnixTime, format} from 'date-fns';
+import {utcToZonedTime} from 'date-fns-tz';
+import {removeChildren, createContainer, celsiusToFahrenheit, degree} from '../helpers/helper';
 
 const DailyUI = (Weather) => {
   let tempUnit = 'c';
@@ -14,7 +15,7 @@ const DailyUI = (Weather) => {
       const conditionSpan = createContainer('span');
       const tempSpan = createContainer('span');
 
-      daySpan.textContent = dt === 'Yesterday' ? 'Yesterday' : format(fromUnixTime(dt), 'EEEE');
+      daySpan.textContent = dt === 'Yesterday' ? 'Yesterday' : format(utcToZonedTime(fromUnixTime(dt), tz), 'EEEE');
       conditionSpan.textContent = weather[0].main;
 
       let newTemp = temp.max ? temp.max : temp;
@@ -36,12 +37,12 @@ const DailyUI = (Weather) => {
 
   const setWeather = (newWeather) => {
     Weather = newWeather;
+    tz = Weather?.data?.timezone;
     _render();
   };
 
   const toggleCelsius = () => {
     tempUnit = tempUnit === 'c' ? 'f' : 'c';
-    tz = Weather?.data?.timezone;
     _render();
   };
 

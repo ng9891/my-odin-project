@@ -15,7 +15,7 @@ const WeatherController = (() => {
     const dataResponse = await fetch(url, {mode: 'cors'});
     const data = await dataResponse.json();
 
-    return {data};
+    return data;
   };
 
   const reverseGeocodeUnsafe = async (lat, lon, limit = 1) => {
@@ -27,7 +27,7 @@ const WeatherController = (() => {
     const dataResponse = await fetch(url, {mode: 'cors'});
 
     const data = await dataResponse.json();
-    return {data};
+    return data;
   };
 
   const getDataUnsafe = async (lat, lon, units = 'metric', exclude = 'minutely,alerts') => {

@@ -1,16 +1,18 @@
 import {format, fromUnixTime} from 'date-fns';
+import {utcToZonedTime} from 'date-fns-tz';
 import {removeChildren, createContainer, addChildren, celsiusToFahrenheit, degree} from '../helpers/helper';
 
 const ForecastUI = (Weather) => {
   let tempUnit = 'c';
   let tz = Weather?.data?.timezone;
+
   const $location = document.querySelector('.forecast .location');
   const $smallDetail = document.querySelector('.forecast .small-details');
   const $currWeather = document.querySelector('.forecast .weather');
   const $hourly = document.querySelector('.forecast .hourly');
   const $details = document.querySelector('main .details');
 
-  const _createLocation = (city, country,date) => {
+  const _createLocation = (city, country, date) => {
     removeChildren($location);
     const citySpan = createContainer('span', 'city');
     const dateSpan = createContainer('span', 'date');
@@ -85,7 +87,7 @@ const ForecastUI = (Weather) => {
     const cardArr = [];
     for (let i = 1; i <= TOTAL_CARDS; i++) {
       const {dt, temp, weather, pop} = data[i];
-      const date = fromUnixTime(dt);
+      const date = utcToZonedTime(fromUnixTime(dt), tz);
       const iconID = weather[0]?.id;
       const condition = weather[0]?.description;
       cardArr.push(createCard({date, temp, iconID, condition, precipitationChance: pop}));
@@ -109,19 +111,19 @@ const ForecastUI = (Weather) => {
     let precipitation = '0mm';
     let chance = '0%';
     if (rain) {
-      precipitation = `${rain['1h']}mm`;
+      precipitation = `${rain}mm`;
       chance = ` ${pop * 100}%`;
     } else if (snow) {
-      precipitation = `${snow['1h']}mm`;
+      precipitation = `${snow}mm`;
       chance = `${pop * 100}%`;
     }
     const detailObj = {
-      sunrise: format(fromUnixTime(sunrise), 'h:mmaaa'),
-      sunset: format(fromUnixTime(sunset), 'h:mmaaa'),
+      sunrise: format(utcToZonedTime(fromUnixTime(sunrise), tz), 'h:mmaaa'),
+      sunset: format(utcToZonedTime(fromUnixTime(sunset), tz), 'h:mmaaa'),
       ['Precipitation chance']: chance,
       ['Precipitation']: precipitation,
       humidity: `${humidity}%`,
-      visibility: `${Math.floor(visibility / 1000)} km`,
+      // visibility: `${Math.floor(visibility / 1000)} km`,
       pressure: `${pressure} hPa`,
       ['wind']: `${wind_speed}m/s ${wind_deg}${degree}`,
       ['UV Index']: uvi,
@@ -134,7 +136,7 @@ const ForecastUI = (Weather) => {
 
   const _render = () => {
     const currWeather = Weather.data.current;
-    const date = fromUnixTime(currWeather.dt);
+    const date = utcToZonedTime(fromUnixTime(currWeather.dt), tz);
     const daily = Weather.data.daily;
     const todayMinTemp = daily[0].temp.min;
     const todayMaxTemp = daily[0].temp.max;
@@ -146,12 +148,13 @@ const ForecastUI = (Weather) => {
     _createSmallDetail(date, currWeather.temp, todayMinTemp, todayMaxTemp, currWeather.feels_like);
     _createCurrWeather(iconID, condition);
     _createHourlyForecast(Weather.data.hourly);
-    _createDetails(currWeather, chanceOfPrecipitation);
+    _createDetails(daily[0], chanceOfPrecipitation);
   };
 
   const setWeather = (newWeather) => {
     Weather = newWeather;
     tz = Weather?.data?.timezone;
+    localStorage.setItem('lastQuery', `${Weather.name}, ${Weather.country}`);
     _render();
   };
 
@@ -161,6 +164,7 @@ const ForecastUI = (Weather) => {
   };
 
   _render();
+  localStorage.setItem('lastQuery', `${Weather.name}, ${Weather.country}`);
 
   return {
     setWeather,

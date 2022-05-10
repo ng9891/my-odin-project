@@ -1,5 +1,5 @@
-import Weather from './weather';
-import WeatherController from './weatherController';
+import Weather from './Weather';
+import WeatherController from './WeatherController';
 import ForecastUI from './ForecastUI';
 import DailyUI from './DailyUI';
 
@@ -9,16 +9,24 @@ const $tempUnitToggle = document.querySelector('header .btn-container');
 let forecast;
 let daily;
 
-const search = async () => {
-  const searchInput = $searchBar.firstElementChild;
-  const results = await WeatherController.geocode(searchInput.value);
-  const {name, country, lat, lon} = results.data[0];
+const query = async (place) => {
+  const results = await WeatherController.geocode(place);
+  if (results.length === 0) return alert('No results.');
+  const {name, country, lat, lon} = results[0];
   const data = await WeatherController.getData(lat, lon);
 
   const weather = Weather(name, country, data);
-  forecast = forecast ? forecast.setWeather(weather) : ForecastUI(weather);
-  daily = daily ? daily.setWeather(weather) : DailyUI(weather);
 
+  if (!forecast) forecast = ForecastUI(weather);
+  else forecast.setWeather(weather);
+
+  if (!daily) daily = DailyUI(weather);
+  else daily.setWeather(weather);
+};
+
+const search = () => {
+  const searchInput = $searchBar.firstElementChild;
+  query(searchInput.value);
 };
 
 const handleEnter = (e) => {
@@ -40,6 +48,20 @@ const handleUnitChange = (e) => {
   target.classList.add('active');
 };
 
+const handleDefault = async () => {
+  const q = localStorage.getItem('lastQuery');
+  if (q) query(q);
+  else {
+    const lat = 40.73061;
+    const lon = -73.935242;
+    const data = await WeatherController.getData(lat, lon);
+    const weather = Weather('New York', 'US', data);
+
+    forecast = ForecastUI(weather);
+    daily = DailyUI(weather);
+  }
+};
+
 const main = () => {
   const searchBtn = $searchBar.lastElementChild;
   searchBtn.addEventListener('click', search);
@@ -58,14 +80,16 @@ const main = () => {
       const reverse = await WeatherController.reverseGeocode(lat, lon);
       const {name, country} = reverse[0];
       const data = await WeatherController.getData(lat, lon);
-      console.log(data);
       const newWeather = Weather(name, country, data);
 
-      forecast = ForecastUI(newWeather);
-      daily = DailyUI(newWeather);
-    });
-  }else{
+      if (!forecast) forecast = ForecastUI(newWeather);
+      else forecast.setWeather(newWeather);
 
+      if (!daily) daily = DailyUI(newWeather);
+      else daily.setWeather(newWeather);
+    }, handleDefault);
+  } else {
+    handleDefault();
   }
 };
 

@@ -290,9 +290,20 @@ footer > span {
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  opacity: 0.8;
+}
+
+footer a:visited {
+  color: var(--font-color-secondary);
 }
 
 @media only screen and (min-width: 760px) {
+  header {
+    flex-direction: row;
+    justify-content: center;
+    padding-inline: 10%;
+  }
+
   main {
     --general-padding-inline: 20%;
   }
@@ -302,7 +313,7 @@ footer > span {
   }
 
   main .details {
-    --details-per-row: 3;
+    --details-per-row: 4;
   }
 
   main .daily {
@@ -312,8 +323,6 @@ footer > span {
 
 @media only screen and (min-width: 1280px) {
   header {
-    flex-direction: row;
-    justify-content: center;
     padding-inline: 30%;
   }
 
