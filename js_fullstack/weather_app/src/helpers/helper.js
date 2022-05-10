@@ -32,3 +32,7 @@ export const getPreviousDayDT = () => {
   const date = new Date();
   return Math.floor(date.getTime() / 1000);
 };
+
+export const celsiusToFahrenheit = (c)=>{
+  return c * (9/5) + 32
+}

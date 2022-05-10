@@ -1,29 +1,39 @@
 import {format, fromUnixTime} from 'date-fns';
-import {removeChildren, createContainer, addChildren, degree} from '../helpers/helper';
+import {removeChildren, createContainer, addChildren, celsiusToFahrenheit, degree} from '../helpers/helper';
 
 const ForecastUI = (Weather) => {
+  let tempUnit = 'c';
+  let tz = Weather?.data?.timezone;
   const $location = document.querySelector('.forecast .location');
   const $smallDetail = document.querySelector('.forecast .small-details');
   const $currWeather = document.querySelector('.forecast .weather');
   const $hourly = document.querySelector('.forecast .hourly');
   const $details = document.querySelector('main .details');
 
-  const _createLocation = (city, date) => {
+  const _createLocation = (city, country,date) => {
     removeChildren($location);
     const citySpan = createContainer('span', 'city');
     const dateSpan = createContainer('span', 'date');
 
-    citySpan.textContent = city;
+    citySpan.textContent = `${city}, ${country}`;
     dateSpan.textContent = format(date, 'd MMMM yyyy');
     addChildren($location, [citySpan, dateSpan]);
   };
 
   const _createSmallDetail = (date, temp, lowTemp, highTemp, feel) => {
     removeChildren($smallDetail);
-    temp = Math.floor(temp);
-    lowTemp = Math.floor(lowTemp);
-    highTemp = Math.floor(highTemp);
-    feel = Math.floor(feel);
+    if (tempUnit === 'f') {
+      temp = Math.floor(celsiusToFahrenheit(temp));
+      lowTemp = Math.floor(celsiusToFahrenheit(lowTemp));
+      highTemp = Math.floor(celsiusToFahrenheit(highTemp));
+      feel = Math.floor(celsiusToFahrenheit(feel));
+    } else {
+      temp = Math.floor(temp);
+      lowTemp = Math.floor(lowTemp);
+      highTemp = Math.floor(highTemp);
+      feel = Math.floor(feel);
+    }
+
     const daySpan = createContainer('span', 'day');
     const timeSpan = createContainer('span', 'time');
     const lhSpan = createContainer('span', 'low-high');
@@ -59,7 +69,9 @@ const ForecastUI = (Weather) => {
 
       timeSpan.textContent = format(date, 'h:mmaaa');
       conditionSpan.textContent = condition;
-      tempSpan.textContent = `${Math.floor(temp)}${degree}`;
+      let newTemp = temp;
+      if (tempUnit === 'f') newTemp = celsiusToFahrenheit(temp);
+      tempSpan.textContent = `${Math.floor(newTemp)}${degree}`;
 
       if (precipitationChance) {
         const chance = Math.floor(precipitationChance * 100);
@@ -130,22 +142,29 @@ const ForecastUI = (Weather) => {
     const condition = currWeather.weather[0].description;
     const chanceOfPrecipitation = Weather.data.hourly[0].pop;
 
-    _createLocation(Weather.name, date);
+    _createLocation(Weather.name, Weather.country, date);
     _createSmallDetail(date, currWeather.temp, todayMinTemp, todayMaxTemp, currWeather.feels_like);
     _createCurrWeather(iconID, condition);
     _createHourlyForecast(Weather.data.hourly);
     _createDetails(currWeather, chanceOfPrecipitation);
   };
 
-  const setData = (newWeather) => {
+  const setWeather = (newWeather) => {
     Weather = newWeather;
+    tz = Weather?.data?.timezone;
+    _render();
+  };
+
+  const toggleCelsius = () => {
+    tempUnit = tempUnit === 'c' ? 'f' : 'c';
     _render();
   };
 
   _render();
 
   return {
-    setData,
+    setWeather,
+    toggleCelsius,
   };
 };
 

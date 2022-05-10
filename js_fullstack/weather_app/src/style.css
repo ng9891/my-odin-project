@@ -14,7 +14,7 @@
   --color-main: white;
   --color-secondary: #3d5a80;
   --color-tertiary: #293241;
-  --color-accent-main: rgba(238, 109, 77, 0.8);
+  --color-accent-main: rgba(238, 109, 77, 0.9);
   --color-accent-main-hover: #ee6c4d;
 
   --color-rain: blue;
@@ -49,6 +49,8 @@ header .search input {
   border-radius: 0;
   outline: none;
   border: 1px solid black;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 header .search input:focus {
@@ -64,6 +66,8 @@ header .search button {
   border: 1px solid black;
   border-left-style: none;
   border-radius: 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   outline: none;
 }
 

@@ -16,15 +16,18 @@
       <h1>Weather</h1>
     </div>
     <div class="search">
-      <input type="search" name="search" id="search" placeholder="Enter a City">
+      <input type="search" name="q" id="search" placeholder="Enter a City" list="autocomplete" minlength="2">
+      <datalist id="autocomplete">
+
+      </datalist>
       <button>Search</button>
     </div>
     <div class="btn-container">
-      <span class="active">
+      <span class="c active">
         °C
       </span>
       /
-      <span>
+      <span class="f">
         °F
       </span>
     </div>
