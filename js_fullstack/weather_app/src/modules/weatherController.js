@@ -1,4 +1,4 @@
-import {getPreviousDayDT} from './helper';
+import {getPreviousDayDT, handleError} from '../helpers/helper';
 
 const FREE = '17c0775075508ec49f2913ca7f02bf44';
 const GEOCODING_URL = `http://api.openweathermap.org/geo/1.0/direct?appid=${FREE}`;
@@ -6,13 +6,6 @@ const ONE_CALL_URL = `https://api.openweathermap.org/data/2.5/onecall?appid=${FR
 const ONE_CALL_HIST_URL = `https://api.openweathermap.org/data/2.5/onecall/timemachine?appid=${FREE}&units=metric`;
 
 const WeatherController = (() => {
-  const handleError =
-    (fn) =>
-    (...params) =>
-      fn(...params).catch((e) => {
-        console.error(e);
-      });
-
   const geocodeUnsafe = async (q, limit = 5) => {
     if (!q) return;
     let url = GEOCODING_URL;

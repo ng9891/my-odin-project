@@ -1,5 +1,228 @@
-*{
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(./assets/font/Ubuntu-Regular.ttf) format('ttf');
+}
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Ubuntu', 'Courier New', Courier, monospace;
+}
+
+:root {
+  --color-main: white;
+  --color-secondary: #3d5a80;
+  --color-tertiary: #293241;
+  --color-accent-main: #ee6c4d;
+  --color-accent-main-hover: gray;
+
+  --color-rain: blue;
+
+  --font-color-main: black;
+  --font-color-secondary: white;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+  background-color: var(--color-secondary);
+  color: var(--font-color-secondary);
+}
+
+header .logo {
+  text-align: center;
+}
+
+header .search {
+  display: flex;
+  height: 1.5rem;
+}
+
+header .search input {
+  width: 100%;
+  padding: 0 0.5rem;
+  border-radius: 0;
+  outline: none;
+  border: 1px solid black;
+}
+
+header .search input:focus {
+  border-radius: 0;
+  outline: none;
+}
+
+header .search button {
+  cursor: pointer;
+  padding-inline: 0.5rem;
+  background-color: var(--color-accent-main);
+  box-shadow: none;
+  border: 1px solid black;
+  border-left-style: none;
+  border-radius: 0;
+  outline: none;
+}
+
+header .search button:hover,
+header .search button:active {
+  background-color: var(--color-accent-main-hover);
+}
+
+header .btn-container {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+header .btn-container > span.active {
+  font-weight: bold;
+  font-size: 1.05rem;
+  text-decoration: underline;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main .forecast {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'location location' 'detail weather' 'hourly hourly';
+  text-transform: uppercase;
+  width: 100%;
+  padding-inline: 1rem;
+  gap: 1rem;
+}
+
+main .forecast .location {
+  grid-area: location;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+}
+
+main .forecast .location span.city {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+main .forecast .location span.date {
+  display: flex;
+}
+
+main .forecast .small-details {
+  grid-area: detail;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: start;
+}
+
+main .forecast .small-details span:not(.time) {
+  font-weight: 500;
+}
+
+main .forecast .small-details .time {
+  font-size: 0.8rem;
+}
+
+main .forecast .small-details .temp {
+  font-size: 4rem;
+  display: flex;
+  align-items: flex-end;
+  line-height: 0.9;
+}
+
+main .forecast .small-details .feel {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+main .forecast .weather {
+  grid-area: weather;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+main .forecast .weather i {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+}
+
+main .forecast .weather .condition {
+  text-align: center;
+}
+
+main .hourly {
+  grid-area: hourly;
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  width: 100%;
+  gap: var(--card-gap);
+  margin: 1rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  --card-gap: 1rem;
+  --card-shown: 3;
+}
+
+main .hourly > .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1rem 0;
+  flex: 1 0 calc((100% - var(--card-gap) * var(--card-shown) + 1rem) / var(--card-shown));
+  height: 100%;
+}
+
+main .hourly > .card i:not(.wi-raindrop) {
+  font-size: 1.4rem;
+}
+
+main .hourly > .card .rain {
+  margin-bottom: auto;
+}
+
+main .hourly > .card .condition {
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+main .hourly > .card .rain {
+  font-size: 0.75rem;
+  color: var(--color-rain);
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+main .details {
+  width: 100%;
+  background-color: var(--color-tertiary);
+  display: flex;
+  color: var(--font-color-secondary);
+}
+
+footer {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
 }

@@ -2,17 +2,145 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather App</title>
-  <script src="bundle.js"></script>
+  <link rel="icon" type="image/x-icon" href="../src/assets/favicon.svg">
+  <script src="bundle.js" defer></script>
 </head>
 
 <body>
-  <div class="content">
-    <!-- <i class="wi wi-owm-600"></i> -->
-  </div>
+  <header>
+    <div class="logo">
+      <h1>Weather Forecast</h1>
+    </div>
+    <div class="search">
+      <input type="search" name="search" id="search" placeholder="Enter a City">
+      <button>Search</button>
+    </div>
+    <div class="btn-container">
+      <span class="active">
+        °C
+      </span>
+      <span>/</span>
+      <span>
+        °F
+      </span>
+    </div>
+  </header>
+  <main>
+    <div class="forecast">
+      <div class="location">
+        <span class="city">City Name</span>
+        <span class="date">Location date</span>
+      </div>
+      <div class="small-details">
+        <span class="day">Monday</span>
+        <span class="time">5:30pm</span>
+        <span class="low-high">L:30° H:31°</span>
+        <span class="temp">30°</span>
+        <span class="feel">Feels like: 30°</span>
+      </div>
+      <div class="weather">
+        <i class="wi wi-owm-day-511"></i>
+        <span class="condition">Overcast clouds</span>
+      </div>
+      <div class="hourly">
+        <div class="card">
+          <span>
+            4:00pm
+          </span>
+          <i class="wi wi-owm-day-511"></i>
+          <span class="condition">Thunderstrom</span>
+          <span>30°</span>
+          <span class="rain">
+            
+          </span>
+        </div>
+        <div class="card">
+          <span>
+            5:00pm
+          </span>
+          <i class="wi wi-owm-day-511"></i>
+          <span class="condition">Overcast Clouds</span>
+          <span>30°</span>
+          <span class="rain">
+            
+          </span>
+        </div>
+        <div class="card">
+          <span>
+            6:00pm
+          </span>
+          <i class="wi wi-owm-day-511"></i>
+          <span class="condition">clear</span>
+          <span>30°</span>
+          <span class="rain">
+            <i class="wi wi-raindrop"></i>
+            10%
+          </span>
+        </div>
+        <div class="card">
+          <span>
+            7:00pm
+          </span>
+          <i class="wi wi-owm-day-511"></i>
+          <span class="condition">clear</span>
+          <span>30°</span>
+          <span class="rain">
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="details">
+      wind lala
+    </div>
+    <div class="daily">
+      <div class="card">
+        <span>
+          Yesterday
+        </span>
+        <span>
+          0%
+        </span>
+        <i class="wi wi-owm-day-511"></i>
+        <span>30°</span>
+      </div>
+      <div class="card">
+        <span>
+          Tuesday
+        </span>
+        <span>
+          0%
+        </span>
+        <i class="wi wi-owm-day-511"></i>
+        <span>30°</span>
+      </div>
+      <div class="card">
+        <span>
+          Wednesday
+        </span>
+        <span>
+          0%
+        </span>
+        <i class="wi wi-owm-day-511"></i>
+        <span>30°</span>
+      </div>
+      <div class="card">
+        <span>
+          Thursday
+        </span>
+        <span>
+          0%
+        </span>
+        <i class="wi wi-owm-day-511"></i>
+        <span>30°</span>
+      </div>
+    </div>
+  </main>
+  <footer>FOOTER</footer>
 </body>
 
 </html>

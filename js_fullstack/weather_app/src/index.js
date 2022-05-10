@@ -1,6 +1,6 @@
-import main from './UI';
+import main from './modules/UI';
 import './style.css';
-import '../dist/weather-icons.min.css';
+import './weather-icons.min.css';
 
 const degree = '°';
 
