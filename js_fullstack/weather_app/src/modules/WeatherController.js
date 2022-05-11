@@ -1,8 +1,8 @@
 import {getPreviousDayDT, handleError} from '../helpers/helper';
 
 const FREE = '17c0775075508ec49f2913ca7f02bf44';
-const GEOCODING_URL = `http://api.openweathermap.org/geo/1.0/direct?appid=${FREE}`;
-const REVERSE_GEOCODE_URL = `http://api.openweathermap.org/geo/1.0/reverse?appid=${FREE}`;
+const GEOCODING_URL = `https://api.openweathermap.org/geo/1.0/direct?appid=${FREE}`;
+const REVERSE_GEOCODE_URL = `https://api.openweathermap.org/geo/1.0/reverse?appid=${FREE}`;
 const ONE_CALL_URL = `https://api.openweathermap.org/data/2.5/onecall?appid=${FREE}&units=metric`;
 const ONE_CALL_HIST_URL = `https://api.openweathermap.org/data/2.5/onecall/timemachine?appid=${FREE}&units=metric`;
 
