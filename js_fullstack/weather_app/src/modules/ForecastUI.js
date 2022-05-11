@@ -108,13 +108,17 @@ const ForecastUI = (Weather) => {
     };
 
     const {sunrise, sunset, humidity, pressure, visibility, wind_speed, wind_deg, rain, snow, uvi} = data;
-    let precipitation = '0mm';
+    let precipitation = '0cm';
     let chance = '0%';
     if (rain) {
-      precipitation = `${rain}mm`;
+      // round to 2 decimals
+      const rainInCM = Math.round((rain / 10) * 100) / 100;
+      precipitation = `${rainInCM}cm`;
       chance = ` ${pop * 100}%`;
     } else if (snow) {
-      precipitation = `${snow}mm`;
+      // round to 2 decimals
+      const snowInCM = Math.round((snow / 10) * 100) / 100;
+      precipitation = `${snowInCM}cm`;
       chance = `${pop * 100}%`;
     }
     const detailObj = {

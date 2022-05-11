@@ -5,16 +5,29 @@ import DailyUI from './DailyUI';
 
 const $searchBar = document.querySelector('header .search');
 const $tempUnitToggle = document.querySelector('header .btn-container');
+const $loadingIcon = document.querySelector('.loading');
+const $mainContainer = document.querySelector('main');
+const $footerContainer = document.querySelector('footer');
 
 let forecast;
 let daily;
 
-const query = async (place) => {
-  const results = await WeatherController.geocode(place);
-  if (results.length === 0) return alert('No results.');
-  const {name, country, lat, lon} = results[0];
-  const data = await WeatherController.getData(lat, lon);
+const toggleLoading = () => {
+  const isActive = $loadingIcon.classList.contains('active');
+  if (isActive) {
+    $loadingIcon.classList.remove('active');
+    $mainContainer.style.display = 'flex';
+    $footerContainer.style.display = 'flex';
+  } else {
+    $loadingIcon.classList.add('active');
+    $mainContainer.style.display = 'none';
+    $footerContainer.style.display = 'none';
+  }
+};
 
+const queryData = async ({name, country, lat, lon}) => {
+  if (!lat || !lon) return console.error('No lat or lon in queryData');
+  const data = await WeatherController.getData(lat, lon);
   const weather = Weather(name, country, data);
 
   if (!forecast) forecast = ForecastUI(weather);
@@ -24,9 +37,33 @@ const query = async (place) => {
   else daily.setWeather(weather);
 };
 
-const search = () => {
+const geocode = async (place) => {
+  if (!place) return console.error('No place specified in geocode');
+  const results = await WeatherController.geocode(place);
+  if (!results || results.message) {
+    alert('No result found for ', place);
+    return;
+  }
+  return results;
+};
+
+const reverseGeocode = async (lat, lon) => {
+  if (!lat || !lon) return console.error('No lat or lon specified in reverseGeocode');
+  const reverse = await WeatherController.reverseGeocode(lat, lon);
+  if (!reverse || reverse.message) {
+    alert(`No result found for lat:${lat} lon:${lon}`);
+    return;
+  }
+  return reverse;
+};
+
+const search = async () => {
+  toggleLoading();
   const searchInput = $searchBar.firstElementChild;
-  query(searchInput.value);
+  const data = await geocode(searchInput.value);
+  const {name, country, lat, lon} = data[0];
+  await queryData({name, country, lat, lon});
+  toggleLoading();
 };
 
 const handleEnter = (e) => {
@@ -50,7 +87,11 @@ const handleUnitChange = (e) => {
 
 const handleDefault = async () => {
   const q = localStorage.getItem('lastQuery');
-  if (q) query(q);
+  if (q){
+    const data = await geocode(q);
+    const {name, country, lat, lon} = data[0];
+    await queryData({name, country, lat, lon})
+  }
   else {
     const lat = 40.73061;
     const lon = -73.935242;
@@ -60,6 +101,7 @@ const handleDefault = async () => {
     forecast = ForecastUI(weather);
     daily = DailyUI(weather);
   }
+  toggleLoading();
 };
 
 const main = () => {
@@ -76,17 +118,10 @@ const main = () => {
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
-
-      const reverse = await WeatherController.reverseGeocode(lat, lon);
-      const {name, country} = reverse[0];
-      const data = await WeatherController.getData(lat, lon);
-      const newWeather = Weather(name, country, data);
-
-      if (!forecast) forecast = ForecastUI(newWeather);
-      else forecast.setWeather(newWeather);
-
-      if (!daily) daily = DailyUI(newWeather);
-      else daily.setWeather(newWeather);
+      const data = await reverseGeocode(lat, lon);
+      const {name, country} = data[0];
+      await queryData({name, country, lat, lon});
+      toggleLoading();
     }, handleDefault);
   } else {
     handleDefault();

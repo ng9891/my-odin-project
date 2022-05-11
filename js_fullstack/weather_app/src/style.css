@@ -13,6 +13,7 @@
 :root {
   --color-main: white;
   --color-secondary: #3d5a80;
+  --color-secondary-opaque: #96b1d3;
   --color-tertiary: #293241;
   --color-accent-main: rgba(238, 109, 77, 0.9);
   --color-accent-main-hover: #ee6c4d;
@@ -21,6 +22,70 @@
 
   --font-color-main: black;
   --font-color-secondary: white;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+
+  --dot-size: 1rem;
+  --dot-gap: 1rem;
+  --dot-radius: 5px;
+}
+
+/* https://codepen.io/nzbin/pen/GGrXbp */
+.loading {
+  display: none;
+  margin-top: 3rem;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: var(--dot-radius);
+  background-color: var(--color-secondary);
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+
+.loading.active {
+  display: block;
+  position: relative;
+}
+
+.loading.active::before,
+.loading.active::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.loading::before {
+  left: calc((var(--dot-size) + var(--dot-gap)) * -1);
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: var(--dot-radius);
+  background-color: var(--color-secondary);
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+
+.loading::after {
+  left: calc(var(--dot-size) + var(--dot-gap));
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: var(--dot-radius);
+  background-color: var(--color-secondary);
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: var(--color-secondary);
+  }
+  50%,
+  100% {
+    background-color: var(--color-secondary-opaque);
+  }
 }
 
 header {
@@ -93,7 +158,7 @@ header .btn-container > span.active {
 }
 
 main {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -208,9 +273,11 @@ main .hourly > .card i:not(.wi-raindrop) {
 main .hourly > .card .condition {
   font-size: 0.8rem;
   overflow-wrap: anywhere;
-  text-align: center;
   flex-shrink: 1;
   flex-basis: 25%;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 main .hourly > .card .rain {
@@ -276,8 +343,8 @@ main .daily > div i {
 }
 
 footer {
+  display: none;
   border-top: 1px solid black;
-  display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
