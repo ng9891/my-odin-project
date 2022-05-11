@@ -16,6 +16,7 @@ This repository is used to keep track of my progress and projects of [the Odin P
   - [Library App](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/library_project)
   - [Tic Tac Toe with Minimax](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/tic_tac_toe)
   - [TODO List App](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/todo)
+  - [Weather Forecast App](https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/weather_app)
 
 ---
 
@@ -35,7 +36,7 @@ This repository is used to keep track of my progress and projects of [the Odin P
     - [x] CSS
     - [x] Grid
   - [ ] JS
-    - [ ] Async JS
+    - [x] Async JS
     - [ ] Testing
     - [ ] Git
     - [ ] ReactJS
