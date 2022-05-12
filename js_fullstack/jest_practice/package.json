@@ -1,0 +1,16 @@
+{
+  "name": "jest_practice",
+  "version": "1.0.0",
+  "description": "A Little practice for TDD using Jest.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "twatch": "jest --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^28.1.0"
+  }
+}
