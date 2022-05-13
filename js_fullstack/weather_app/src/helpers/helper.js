@@ -28,9 +28,11 @@ export const removeChildren = (parentEl) => {
   }
 };
 
+import sub from 'date-fns/sub'
 export const getPreviousDayDT = () => {
   const date = new Date();
-  return Math.floor(date.getTime() / 1000);
+  const yesterday = sub(date,{days:1});
+  return Math.floor(yesterday.getTime() / 1000);
 };
 
 export const celsiusToFahrenheit = (c)=>{

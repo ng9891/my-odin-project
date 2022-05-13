@@ -139,6 +139,7 @@ const ForecastUI = (Weather) => {
   };
 
   const _render = () => {
+    if(!Weather) return console.error('No Weather Object');
     const currWeather = Weather.data.current;
     const date = utcToZonedTime(fromUnixTime(currWeather.dt), tz);
     const daily = Weather.data.daily;

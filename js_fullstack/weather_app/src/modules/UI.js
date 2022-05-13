@@ -60,7 +60,9 @@ const reverseGeocode = async (lat, lon) => {
 const search = async () => {
   toggleLoading();
   const searchInput = $searchBar.firstElementChild;
+  if(!searchInput.value) return toggleLoading();
   const data = await geocode(searchInput.value);
+  if(!data || data.length === 0) return toggleLoading();
   const {name, country, lat, lon} = data[0];
   await queryData({name, country, lat, lon});
   toggleLoading();
@@ -80,6 +82,8 @@ const handleUnitChange = (e) => {
   forecast.toggleCelsius();
   daily.toggleCelsius();
 
+  localStorage.setItem('temperatureUnit', target.className)
+
   const prev = $tempUnitToggle.querySelector('span.active');
   prev.classList.remove('active');
   target.classList.add('active');
@@ -87,6 +91,8 @@ const handleUnitChange = (e) => {
 
 const handleDefault = async () => {
   const q = localStorage.getItem('lastQuery');
+  let unit = localStorage.getItem('temperatureUnit');
+  if(!unit) unit = 'c';
   if (q){
     const data = await geocode(q);
     const {name, country, lat, lon} = data[0];
@@ -101,10 +107,18 @@ const handleDefault = async () => {
     forecast = ForecastUI(weather);
     daily = DailyUI(weather);
   }
+  setUnit(unit);
   toggleLoading();
 };
 
+const setUnit = (unit)=>{
+  document.querySelector(`header .btn-container span.${unit}`).click();
+}
+
 const main = () => {
+  let unit = localStorage.getItem('temperatureUnit');
+  if(!unit) unit = 'c';
+
   const searchBtn = $searchBar.lastElementChild;
   searchBtn.addEventListener('click', search);
 
@@ -121,6 +135,7 @@ const main = () => {
       const data = await reverseGeocode(lat, lon);
       const {name, country} = data[0];
       await queryData({name, country, lat, lon});
+      setUnit(unit);
       toggleLoading();
     }, handleDefault);
   } else {

@@ -28,6 +28,7 @@ const DailyUI = (Weather) => {
   };
 
   const _render = () => {
+    if(!Weather) return console.error('No Weather Object');
     const data = [...Weather.data.daily];
     const yesterday = Weather.data.previous.current;
     yesterday.dt = 'Yesterday';
