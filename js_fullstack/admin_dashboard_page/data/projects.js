@@ -5,8 +5,7 @@ const PROJECTS = {
       github: 'https://github.com/ng9891/my-odin-project/tree/main/foundation/landing_page',
       link: 'https://ng9891.github.io/my-odin-project/foundation/landing_page/',
       img: 'https://storage.googleapis.com/picboi-39298.appspot.com/final/QNdKB2k6_1000x800',
-      desc:
-        'The objective is to apply all the CSS and HTML learnt up until this point and recreate a landing page taken from an image.',
+      desc: 'The objective is to apply all the CSS and HTML learnt up until this point and recreate a landing page taken from an image.',
     },
     {
       name: 'Rock Paper Scissors',
@@ -55,8 +54,7 @@ const PROJECTS = {
       github: 'https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/tic_tac_toe',
       link: 'https://ng9891.github.io/my-odin-project/js_fullstack/tic_tac_toe/',
       img: 'https://storage.googleapis.com/picboi-39298.appspot.com/final/LflhHum1_1000x800',
-      desc:
-        'Tic Tac Toe game built using JS factory/module functions and the Minimax algorithm with alpha-beta prunning.',
+      desc: 'Tic Tac Toe game built using JS factory/module functions and the Minimax algorithm with alpha-beta prunning.',
     },
     {
       name: 'TODO List App',
@@ -64,6 +62,13 @@ const PROJECTS = {
       link: 'https://ng9891.github.io/my-odin-project/js_fullstack/todo/dist/',
       img: 'https://storage.googleapis.com/picboi-39298.appspot.com/final/4CKB68yK_1000x800',
       desc: 'Dynamically created TODO list application using Webpack and modular patterns.',
+    },
+    {
+      name: 'Weather Forecast App',
+      github: 'https://github.com/ng9891/my-odin-project/tree/main/js_fullstack/weather_app',
+      link: 'https://ng9891.github.io/my-odin-project/js_fullstack/weather_app/dist/',
+      img: 'https://storage.googleapis.com/picboi-39298.appspot.com/final/6aj5lAbo_1000x800',
+      desc: 'Weather Forecast App made using the OpenWeather API and Webpack.',
     },
   ],
 };

@@ -10,6 +10,6 @@ I tried to make this project as modular as possible. I feel I am still lacking o
 
 The minimax algorithm was something else. Took me the whole day to implement it. However, I had a lot of fun re-learning some AI concepts that I had forgotten.
 
-![preview](https://storage.googleapis.com/picboi-39298.appspot.com/final/LflhHum1_1000x800)
+![preview](https://i.ibb.co/GtCVP28/tictac.png)
 
 Author: vT

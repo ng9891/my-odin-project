@@ -10,6 +10,6 @@ I had fun designing this project. I wanted it to be as close as it can get to an
 
 P.S. Designing a loading animation with CSS Keyframes is very interesting. Should probably learn more.
 
-![preview](https://storage.googleapis.com/picboi-39298.appspot.com/final/6aj5lAbo_1000x800)
+![preview](https://i.ibb.co/d779QMV/weather-app.png)
 
 Author: vT

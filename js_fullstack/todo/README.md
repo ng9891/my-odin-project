@@ -15,6 +15,6 @@ I decided `not` to generate unique ID's for each generated project and task. So,
 Lesson learned: have a `unique ID`... makes life much easier... 
 
 
-![preview](https://storage.googleapis.com/picboi-39298.appspot.com/final/4CKB68yK_1000x800)
+![preview](https://i.ibb.co/R4vr9Dy/todoapp.png)
 
 Author: vT

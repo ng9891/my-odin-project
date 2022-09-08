@@ -20,6 +20,6 @@ To review:
  - minmax()
  - clamp()
   
-![preview](https://storage.googleapis.com/picboi-39298.appspot.com/final/7OmtGxds_1000x800)
+![preview](https://i.ibb.co/72gL9tX/adminpage.png)
 
 Author: vT
